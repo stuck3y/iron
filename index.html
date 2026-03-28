@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Iron Sharpens Iron — 30-Day Fitness & Spiritual Tracker</title>
+<meta name="description" content="Iron Sharpens Iron: A 30-day Bible reading and fitness challenge. April 2026 — The Book of Acts.">
+<meta name="theme-color" content="#0c0a09">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0c0a09;color:#e7e5e4;font-family:'Crimson Pro',Georgia,serif;-webkit-font-smoothing:antialiased;min-height:100vh;
+  background-image:radial-gradient(ellipse at top,rgba(120,80,40,.08) 0%,transparent 60%)}
+.mono{font-family:'JetBrains Mono',monospace}
+a{text-decoration:none;color:inherit}
+button{background:none;border:none;cursor:pointer;font-family:inherit;color:inherit}
+
+.wrap{max-width:512px;margin:0 auto;padding:0 20px 64px}
+.wrap>*+*{margin-top:20px}
+.header-bg{background:linear-gradient(135deg,rgba(120,80,30,.15) 0%,transparent 50%,rgba(80,60,30,.1) 100%)}
+.header-inner{max-width:512px;margin:0 auto;padding:40px 20px 24px}
+
+.card{border-radius:16px;border:1px solid rgba(68,64,60,.4);background:rgba(28,25,23,.6);transition:all .3s;overflow:hidden}
+.card:hover{border-color:rgba(68,64,60,.6)}
+.card-today{border-radius:16px;border:1px solid rgba(217,119,6,.6);background:linear-gradient(to bottom,rgba(41,37,36,.9),rgba(28,25,23,.9));box-shadow:0 10px 15px -3px rgba(120,53,15,.2);overflow:hidden}
+.card-done{border-radius:16px;border:1px solid rgba(68,64,60,.3);background:rgba(28,25,23,.4);opacity:.7;overflow:hidden}
+
+.card-btn{width:100%;text-align:left;padding:16px 20px;display:flex;align-items:center;gap:16px}
+.day-circle{flex-shrink:0;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+.dc-today{background:#b45309;color:#fffbeb}
+.dc-done{background:rgba(20,83,45,.5);color:#4ade80;border:1px solid rgba(21,128,61,.4)}
+.dc-def{background:#292524;color:#a8a29e}
+
+.badge{font-size:12px;font-weight:500;padding:2px 8px;border-radius:9999px;display:inline-block}
+.b-today{background:rgba(180,83,9,.4);color:#fcd34d}
+.b-done{background:rgba(20,83,45,.3);color:#4ade80}
+
+.chevron{width:20px;height:20px;flex-shrink:0;color:#78716c;transition:transform .2s}
+.chevron-open{transform:rotate(180deg)}
+
+.expand{padding:0 20px 20px}
+.expand>*+*{margin-top:16px}
+
+.read-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;background:#b45309;color:#fffbeb;font-weight:600;font-size:14px;border-radius:12px;transition:background .2s}
+.read-btn:hover{background:#d97706}
+
+.cl-box{background:rgba(41,37,36,.4);border-radius:12px;padding:16px;border:1px solid rgba(68,64,60,.3)}
+.cl-box>*+*{margin-top:8px}
+.check-btn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:2px 0}
+.cb{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:2px solid #78716c;flex-shrink:0;transition:all .2s}
+.cb.on{background:#b45309;border-color:#b45309}
+.cl{font-size:14px;color:#e7e5e4;transition:color .2s}
+.cl.on{color:#78716c;text-decoration:line-through}
+
+.pb-bg{width:100%;height:10px;background:#292524;border-radius:9999px;overflow:hidden}
+.pb-fill{height:100%;background:linear-gradient(to right,#b45309,#f59e0b);border-radius:9999px;transition:width .5s}
+
+.wd{display:flex;align-items:center;gap:12px;padding:12px 4px}
+.wl{height:1px;flex:1;background:rgba(68,64,60,.5)}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:fadeIn .25s ease-out}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(180,120,40,.15)}50%{box-shadow:0 0 35px rgba(180,120,40,.25)}}
+.glow{animation:pulseGlow 4s ease-in-out infinite}
+.ver-toggle{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.ver-btn{font-size:12px;font-weight:600;padding:4px 10px;border-radius:8px;border:1px solid rgba(68,64,60,.4);color:#a8a29e;transition:all .2s;font-family:‘JetBrains Mono’,monospace}
+.ver-btn:hover{border-color:rgba(180,83,9,.4);color:#fde68a}
+.ver-btn.active{background:rgba(180,83,9,.3);border-color:rgba(180,83,9,.5);color:#fcd34d}
+</style>
+
+</head>
+<body>
+
+<header class="header-bg">
+<div class="header-inner">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <div style="width:40px;height:40px;border-radius:12px;background:rgba(120,53,15,.3);border:1px solid rgba(180,83,9,.4);display:flex;align-items:center;justify-content:center"><span style="font-size:20px">⚔️</span></div>
+    <div>
+      <h1 style="font-size:24px;font-weight:700;color:#fffbeb;line-height:1.25;letter-spacing:-.025em">Iron Sharpens Iron</h1>
+      <p class="mono" style="font-size:12px;color:#a8a29e;font-weight:500;letter-spacing:.025em">30-DAY FITNESS & SPIRITUAL TRACKER</p>
+    </div>
+  </div>
+  <a href="https://sharpiron.org" target="_blank" rel="noopener noreferrer" style="font-size:14px;color:#a8a29e;line-height:1.625;display:inline-flex;align-items:center;gap:6px">sharpiron.org <svg style="width:12px;height:12px;color:#78716c" viewBox="0 0 16 16" fill="none"><path d="M5 3h8v8M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+</header>
+
+<div class="wrap" id="app"></div>
+
+<script>
+var DAYS=[
+{day:1,reading:"Acts 1",topic:"The Ascension & the Wait",ph:1,summary:"Jesus gives final instructions, ascends to heaven, and the disciples wait in Jerusalem for the promised Holy Spirit. Matthias replaces Judas."},
+{day:2,reading:"Acts 2",topic:"Pentecost & the First Church",summary:"The Holy Spirit falls at Pentecost. Peter preaches and 3,000 are saved. The first church is born \u2014 devoted to teaching, fellowship, breaking of bread, and prayer."},
+{day:3,reading:"Acts 3",topic:"Healing at the Temple Gate",summary:"Peter heals a lame man at the Beautiful Gate and preaches to the crowd, pointing them to Jesus as the author of life."},
+{day:4,reading:"Acts 4",topic:"Boldness Before the Council",summary:"Peter and John are arrested and brought before the Sanhedrin. Filled with the Spirit, they speak boldly. The believers pray for courage and share everything."},
+{day:5,reading:"Acts 5",topic:"Ananias & Sapphira, Apostles Arrested",summary:"God judges Ananias and Sapphira for lying to the Holy Spirit. The apostles perform signs, are arrested, beaten, and rejoice that they were counted worthy to suffer."},
+{day:6,reading:"Acts 6",topic:"The Seven Chosen, Stephen\u2019s Ministry",summary:"The church appoints seven men to serve. Stephen, full of grace and power, performs wonders and is accused before the council."},
+{day:7,reading:"Acts 7",topic:"Stephen\u2019s Speech & Martyrdom",summary:"Stephen delivers a sweeping history of Israel\u2019s rebellion, calls out the council, and becomes the first Christian martyr \u2014 forgiving his killers as he dies."},
+{day:8,reading:"Acts 8",topic:"The Gospel Spreads to Samaria & Ethiopia",ph:2,summary:"Persecution scatters the church. Philip preaches in Samaria and baptizes the Ethiopian eunuch. The gospel begins to move beyond Jerusalem."},
+{day:9,reading:"Acts 9",topic:"Saul\u2019s Conversion",summary:"Saul meets the risen Christ on the road to Damascus and is radically converted. The persecutor becomes a preacher. Ananias baptizes him."},
+{day:10,reading:"Acts 10",topic:"Peter & Cornelius \u2014 Gospel to the Gentiles",summary:"God gives Peter a vision and sends him to Cornelius, a Roman centurion. The Holy Spirit falls on Gentiles for the first time. No one is unclean."},
+{day:11,reading:"Acts 11",topic:"The Church Accepts the Gentiles",summary:"Peter defends his visit to Cornelius. The church in Antioch is established \u2014 where believers are first called Christians."},
+{day:12,reading:"Acts 12",topic:"James Killed, Peter Rescued",summary:"Herod kills James and imprisons Peter. An angel rescues Peter in the night. Herod is struck down by God for accepting worship."},
+{day:13,reading:"Acts 13",topic:"Paul\u2019s First Missionary Journey Begins",summary:"The church in Antioch sends Barnabas and Saul. Paul preaches in the synagogue at Pisidian Antioch, declaring justification by faith in Christ."},
+{day:14,reading:"Acts 14",topic:"Iconium, Lystra, Derbe",summary:"Paul and Barnabas preach, are mistaken for gods in Lystra, then Paul is stoned and left for dead. He gets up and keeps going."},
+{day:15,reading:"Acts 15",topic:"The Jerusalem Council",ph:3,summary:"The church gathers to settle whether Gentiles must follow the Law. James declares: God makes no distinction. Salvation is by grace through faith."},
+{day:16,reading:"Acts 16",topic:"Philippi & the Jailer",summary:"Paul recruits Timothy, receives the Macedonian call, and travels to Philippi. Lydia believes. Paul and Silas sing in prison; the jailer is saved."},
+{day:17,reading:"Acts 17",topic:"Thessalonica, Berea, Athens",summary:"Paul reasons from Scripture in Thessalonica and Berea. In Athens he preaches on Mars Hill: \u2018The God who made the world does not live in temples made by hands.\u2019"},
+{day:18,reading:"Acts 18",topic:"Corinth & Aquila and Priscilla",summary:"Paul stays in Corinth for 18 months, making tents and preaching. The Lord tells him: \u2018Do not be afraid. I have many people in this city.\u2019"},
+{day:19,reading:"Acts 19",topic:"Ephesus & the Riot",summary:"Paul ministers powerfully in Ephesus for two years. A silversmith named Demetrius incites a riot because the gospel is threatening their idol business."},
+{day:20,reading:"Acts 20",topic:"Farewell to the Ephesian Elders",summary:"Paul raises Eutychus, then gives a tearful farewell to the Ephesian elders at Miletus: \u2018I did not shrink from declaring to you the whole counsel of God.\u2019"},
+{day:21,reading:"Acts 21",topic:"Paul Arrives in Jerusalem",summary:"Paul is warned not to go to Jerusalem but presses on. He is seized in the temple and arrested by Roman soldiers."},
+{day:22,reading:"Acts 22",topic:"Paul\u2019s Defense Before the Crowd",ph:4,summary:"Paul recounts his conversion on the Damascus road to the angry Jerusalem mob. When he mentions the Gentiles, they erupt."},
+{day:23,reading:"Acts 23",topic:"The Plot Against Paul",summary:"Paul stands before the Sanhedrin and divides the Pharisees and Sadducees. A conspiracy to kill him is uncovered, and he is transferred to Caesarea."},
+{day:24,reading:"Acts 24",topic:"Paul Before Felix",summary:"Paul defends himself before Governor Felix, who is convicted but delays: \u2018When I get an opportunity I will summon you.\u2019 He leaves Paul in prison for two years."},
+{day:25,reading:"Acts 25",topic:"Paul Appeals to Caesar",summary:"Festus takes over from Felix. Paul, unwilling to be tried in Jerusalem, exercises his right as a Roman citizen: \u2018I appeal to Caesar.\u2019"},
+{day:26,reading:"Acts 26",topic:"Paul Before Agrippa",summary:"Paul gives his most eloquent defense before King Agrippa, who responds: \u2018In a short time would you persuade me to be a Christian?\u2019"},
+{day:27,reading:"Acts 27",topic:"The Shipwreck",summary:"Paul sails for Rome. A violent storm batters the ship for two weeks. Paul encourages the crew: \u2018Take heart, men. Not one of you will be lost.\u2019 They shipwreck on Malta."},
+{day:28,reading:"Acts 28",topic:"Rome at Last",summary:"Paul arrives in Rome, heals the sick on Malta, and spends two years under house arrest \u2014 preaching the kingdom of God and teaching about Jesus with all boldness."},
+{day:29,reading:"Acts 1\u201314",topic:"Full Re-Read: Part 1",summary:"Review the first half of Acts \u2014 from the birth of the church at Pentecost through Paul\u2019s first missionary journey. See how far the gospel has traveled."},
+{day:30,reading:"Acts 15\u201328",topic:"Full Re-Read: Part 2",summary:"Review the second half \u2014 from the Jerusalem Council through Paul\u2019s arrival in Rome. The gospel has gone from Jerusalem to the ends of the earth."}
+];
+
+var WV={
+1:{r:"Acts 2:11",t:"...we hear them telling in our own tongues the mighty works of God."},
+8:{r:"Acts 9:25",t:"But Saul increased all the more in strength, and confounded the Jews who lived in Damascus by proving that Jesus was the Christ."},
+15:{r:"Acts 14:11",t:"Men, why are you doing these things? We also are men, of like nature with you, and we bring you good news, that you should turn from these vain things to a living God."},
+22:{r:"Acts 19:10",t:"This continued for two years, so that all the residents of Asia heard the word of the Lord, both Jews and Greeks."}
+};
+
+var SK="isi-acts-v1",S=new Date(2026,3,1);
+var VERS=["ESV","NASB","NKJV","NIV","LSB"];
+var VK="isi-version";
+function gver(){try{var v=localStorage.getItem(VK);return VERS.indexOf(v)>=0?v:"ESV"}catch(e){return"ESV"}}
+function sver(v){try{localStorage.setItem(VK,v)}catch(e){}}
+var bv=gver();
+
+function gd(){var n=new Date(),s=new Date(S);s.setHours(0,0,0,0);return Math.max(1,Math.min(30,Math.floor((n-s)/864e5)+1))}
+function ia(){var n=new Date(),s=new Date(S),e=new Date(2026,3,30);s.setHours(0,0,0,0);e.setHours(23,59,59,999);return n>=s&&n<=e}
+function iu(){var s=new Date(S);s.setHours(0,0,0,0);return new Date()<s}
+function gv(d){for(var i=0,b=[22,15,8,1];i<b.length;i++)if(d>=b[i])return WV[b[i]];return WV[1]}
+function lc(){try{return JSON.parse(localStorage.getItem(SK))||{}}catch(e){return{}}}
+function sc(d){try{localStorage.setItem(SK,JSON.stringify(d))}catch(e){}}
+
+var cl=lc(),ed=null,sa=false,cd=gd(),act=ia(),first=true;
+
+function render(){
+  var a=document.getElementById("app"),h="",v=gv(cd),td=DAYS[cd-1];
+
+  if(iu())h+='<div style="border-radius:16px;background:rgba(120,53,15,.2);border:1px solid rgba(180,83,9,.3);padding:20px;text-align:center"><p style="font-size:18px;font-weight:600;color:#fde68a">April Challenge begins April 1st</p><p style="font-size:14px;color:#a8a29e;margin-top:4px">The Book of Acts. The church Christ built. Let\u2019s go, men.</p></div>';
+
+  if(act&&td){
+    h+='<div class="glow" style="border-radius:16px;border:1px solid rgba(217,119,6,.4);background:linear-gradient(to bottom right,rgba(41,37,36,.8),rgba(28,25,23,.9),rgba(28,25,23,1));padding:20px">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between"><div>';
+    h+='<p class="mono" style="font-size:12px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:.05em">Day '+cd+' of 30 \u2014 Today</p>';
+    h+='<h2 style="font-size:20px;font-weight:700;color:#fffbeb;margin-top:4px">'+td.reading+'</h2>';
+    h+='<p style="font-size:14px;color:#a8a29e;margin-top:2px">'+td.topic+'</p></div>';
+    h+='<div style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(120,53,15,.3);border:2px solid rgba(180,83,9,.5)"><span style="font-size:24px;font-weight:700;color:#fcd34d">'+cd+'</span></div></div>';
+    h+='<a href="https://www.biblegateway.com/passage/?search='+encodeURIComponent(td.reading)+'&version='+bv+'" target="_blank" rel="noopener noreferrer" class="read-btn" style="margin-top:16px">\uD83D\uDCD6 Open Today\u2019s Reading</a>';
+    h+='<div class="ver-toggle">';
+    for(var vi=0;vi<VERS.length;vi++)h+='<button class="ver-btn'+(VERS[vi]===bv?' active':'')+'" onclick="sv(\''+VERS[vi]+'\')">'+VERS[vi]+'</button>';
+    h+='</div></div>';
+  }
+
+  if(v){h+='<div style="border-radius:16px;background:rgba(28,25,23,.8);border:1px solid rgba(68,64,60,.4);padding:20px">';
+    h+='<p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">This Week\u2019s Memory Verse</p>';
+    h+='<p style="font-size:16px;font-style:italic;line-height:1.625;color:#e7e5e4">\u201C'+v.t+'\u201D</p>';
+    h+='<p style="font-size:14px;font-weight:600;color:#f59e0b;margin-top:8px">\u2014 '+v.r+'</p></div>'}
+
+  var dayPr=act?Math.round(cd/30*100):(iu()?0:100);
+  h+='<div style="border-radius:16px;background:rgba(28,25,23,.6);border:1px solid rgba(68,64,60,.3);padding:20px">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center"><p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em">Challenge Progress</p><span style="font-size:14px;font-weight:500;color:#a8a29e">Day '+cd+' of 30</span></div>';
+  h+='<div class="pb-bg" style="margin-top:12px"><div class="pb-fill" style="width:'+dayPr+'%"></div></div>';
+  h+='<p style="font-size:12px;color:#78716c;margin-top:12px">'+(30-cd)+' days remaining</p></div>';
+
+  h+='<div>';
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><h2 style="font-size:18px;font-weight:700;color:#e7e5e4">Reading Schedule</h2>';
+  h+='<button onclick="tsa()" style="font-size:12px;font-weight:500;color:#f59e0b;padding:4px 0">'+(sa?"Show less":"Show all 30 days")+'</button></div>';
+
+  var vis=sa?DAYS:DAYS.slice(0,Math.min(cd+2,30));
+  for(var i=0;i<vis.length;i++){
+    var d=vis[i];
+    if(d.ph&&d.day>1){var wv=WV[d.day]||{};
+      h+='<div class="wd"><div class="wl"></div><span class="mono" style="font-size:12px;color:#78716c;font-weight:600;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap">Phase '+d.ph+(wv?' \u2022 Memorize: '+wv.r:'')+'</span><div class="wl"></div></div>'}
+    h+=rd(d);
+  }
+  h+='</div>';
+
+  h+='<footer style="padding-top:32px;padding-bottom:8px;display:flex;align-items:center;justify-content:center;gap:12px;color:#57534e">';
+  h+='<span style="font-size:12px;font-style:italic">\u201CAs iron sharpens iron, so one person sharpens another.\u201D</span>';
+  h+='<span style="color:#44403c">\u2022</span><span style="font-size:12px">Proverbs 27:17</span></footer>';
+
+  a.innerHTML=h;
+  if(first&&act){first=false;ed=cd;render()}
+}
+
+function rd(d){
+  var dk="day-"+d.day,ch=cl[dk]||{},ad=ch.read&&ch.pray&&ch.workout&&ch.abstain&&ch.marco,it=act&&d.day===cd,io=ed===d.day;
+  var cls=it?"card-today":ad?"card-done":"card";
+  var h='<div class="'+cls+'" style="margin-top:12px"><button class="card-btn" onclick="td2('+d.day+')">';
+  h+='<div class="day-circle '+(it?"dc-today":ad?"dc-done":"dc-def")+'">'+(ad?"\u2713":d.day)+'</div>';
+  h+='<div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+  h+='<span style="font-weight:600;font-size:16px;color:'+(it?"#fef3c7":"#e7e5e4")+'">'+d.reading+'</span>';
+  if(it)h+='<span class="badge b-today">TODAY</span>';
+  if(ad&&!it)h+='<span class="badge b-done">DONE</span>';
+  h+='</div><p style="font-size:14px;color:#a8a29e;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+d.topic+'</p></div>';
+  h+='<svg class="chevron'+(io?" chevron-open":"")+'" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>';
+  h+='</button>';
+
+  if(io){
+    h+='<div class="expand anim"><div style="border-top:1px solid rgba(68,64,60,.5);padding-top:16px"></div>';
+    h+='<p style="font-size:14px;line-height:1.625;color:#d6d3d1">'+d.summary+'</p>';
+    h+='<a href="https://www.biblegateway.com/passage/?search='+encodeURIComponent(d.reading)+'&version='+bv+'" target="_blank" rel="noopener noreferrer" class="read-btn">\uD83D\uDCDC Read '+d.reading+' ('+bv+')</a>';
+    h+='<div class="cl-box">';
+    h+='<p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Daily Checklist</p>';
+    h+=rc(dk,"read","Read the passage",ch);
+    h+=rc(dk,"pray","Pray & journal",ch);
+    h+=rc(dk,"workout","Workout (3\u20135x this week)",ch);
+    h+=rc(dk,"abstain","Abstain from your one thing",ch);
+    h+=rc(dk,"marco","Marco Polo update",ch);
+    h+='</div></div>';
+  }
+  h+='</div>';return h;
+}
+
+function rc(dk,f,lb,ch){
+  var on=!!ch[f];
+  return '<button class="check-btn" onclick="tc(\''+dk+'\',\''+f+'\')"><span class="cb'+(on?" on":"")+'">'+
+    (on?'<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':"")+
+    '</span><span class="cl'+(on?" on":"")+'">'+lb+'</span></button>';
+}
+
+function td2(n){ed=ed===n?null:n;render()}
+function tsa(){sa=!sa;render()}
+function tc(dk,f){if(!cl[dk])cl[dk]={};cl[dk][f]=!cl[dk][f];sc(cl);render()}
+function sv(v){bv=v;sver(v);render()}
+render();
+</script>
+
+</body>
+</html>
