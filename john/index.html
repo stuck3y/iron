@@ -1,1 +1,228 @@
-test
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Iron Sharpens Iron — Gospel of John</title>
+<meta name="description" content="Iron Sharpens Iron: 30-day challenge through the Gospel of John.">
+<meta name="theme-color" content="#0c0a09">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0c0a09;color:#e7e5e4;font-family:'Crimson Pro',Georgia,serif;-webkit-font-smoothing:antialiased;min-height:100vh;
+  background-image:radial-gradient(ellipse at top,rgba(120,80,40,.08) 0%,transparent 60%)}
+.mono{font-family:'JetBrains Mono',monospace}
+a{text-decoration:none;color:inherit}
+button{background:none;border:none;cursor:pointer;font-family:inherit;color:inherit}
+.wrap{max-width:512px;margin:0 auto;padding:0 20px 64px}.wrap>*+*{margin-top:20px}
+.header-bg{background:linear-gradient(135deg,rgba(120,80,30,.15) 0%,transparent 50%,rgba(80,60,30,.1) 100%)}
+.header-inner{max-width:512px;margin:0 auto;padding:40px 20px 24px}
+.card{border-radius:16px;border:1px solid rgba(68,64,60,.4);background:rgba(28,25,23,.6);transition:all .3s;overflow:hidden}
+.card:hover{border-color:rgba(68,64,60,.6)}
+.card-today{border-radius:16px;border:1px solid rgba(217,119,6,.6);background:linear-gradient(to bottom,rgba(41,37,36,.9),rgba(28,25,23,.9));box-shadow:0 10px 15px -3px rgba(120,53,15,.2);overflow:hidden}
+.card-done{border-radius:16px;border:1px solid rgba(68,64,60,.3);background:rgba(28,25,23,.4);opacity:.7;overflow:hidden}
+.card-btn{width:100%;text-align:left;padding:16px 20px;display:flex;align-items:center;gap:16px}
+.day-circle{flex-shrink:0;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+.dc-today{background:#b45309;color:#fffbeb}.dc-done{background:rgba(20,83,45,.5);color:#4ade80;border:1px solid rgba(21,128,61,.4)}.dc-def{background:#292524;color:#a8a29e}
+.badge{font-size:12px;font-weight:500;padding:2px 8px;border-radius:9999px;display:inline-block}
+.b-today{background:rgba(180,83,9,.4);color:#fcd34d}.b-done{background:rgba(20,83,45,.3);color:#4ade80}
+.chevron{width:20px;height:20px;flex-shrink:0;color:#78716c;transition:transform .2s}.chevron-open{transform:rotate(180deg)}
+.expand{padding:0 20px 20px}.expand>*+*{margin-top:16px}
+.read-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;background:#b45309;color:#fffbeb;font-weight:600;font-size:14px;border-radius:12px;transition:background .2s}.read-btn:hover{background:#d97706}
+.cl-box{background:rgba(41,37,36,.4);border-radius:12px;padding:16px;border:1px solid rgba(68,64,60,.3)}.cl-box>*+*{margin-top:8px}
+.check-btn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:2px 0}
+.cb{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:2px solid #78716c;flex-shrink:0;transition:all .2s}.cb.on{background:#b45309;border-color:#b45309}
+.cl{font-size:14px;color:#e7e5e4;transition:color .2s}.cl.on{color:#78716c;text-decoration:line-through}
+.pb-bg{width:100%;height:10px;background:#292524;border-radius:9999px;overflow:hidden}
+.pb-fill{height:100%;background:linear-gradient(to right,#b45309,#f59e0b);border-radius:9999px;transition:width .5s}
+.wd{display:flex;align-items:center;gap:12px;padding:12px 4px}.wl{height:1px;flex:1;background:rgba(68,64,60,.5)}
+.ver-toggle{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;justify-content:center}
+.ver-btn{font-size:12px;font-weight:600;padding:4px 10px;border-radius:8px;border:1px solid rgba(68,64,60,.4);color:#a8a29e;transition:all .2s;font-family:'JetBrains Mono',monospace}
+.ver-btn:hover{border-color:rgba(180,83,9,.4);color:#fde68a}.ver-btn.active{background:rgba(180,83,9,.3);border-color:rgba(180,83,9,.5);color:#fcd34d}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}.anim{animation:fadeIn .25s ease-out}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(180,120,40,.15)}50%{box-shadow:0 0 35px rgba(180,120,40,.25)}}.glow{animation:pulseGlow 4s ease-in-out infinite}
+</style>
+</head>
+<body>
+<header class="header-bg">
+<div class="header-inner">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <div style="width:40px;height:40px;border-radius:12px;background:rgba(120,53,15,.3);border:1px solid rgba(180,83,9,.4);display:flex;align-items:center;justify-content:center"><span style="font-size:20px">⚔️</span></div>
+    <div>
+      <h1 style="font-size:24px;font-weight:700;color:#fffbeb;line-height:1.25;letter-spacing:-.025em">Iron Sharpens Iron</h1>
+      <p class="mono" style="font-size:12px;color:#a8a29e;font-weight:500;letter-spacing:.025em">GOSPEL OF JOHN — 30-DAY CHALLENGE</p>
+    </div>
+  </div>
+  <a href="https://sharpiron.org" target="_blank" rel="noopener noreferrer" style="font-size:14px;color:#a8a29e;line-height:1.625;display:inline-flex;align-items:center;gap:6px">sharpiron.org <svg style="width:12px;height:12px;color:#78716c" viewBox="0 0 16 16" fill="none"><path d="M5 3h8v8M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+</header>
+<div class="wrap" id="app"></div>
+<script>
+var DAYS=[
+{day:1,reading:"John 1",topic:"The Word Became Flesh",ph:1,summary:"In the beginning was the Word. John the Baptist testifies. Jesus calls His first disciples \u2014 Andrew, Peter, Philip, and Nathanael. \u2018We have found the Messiah.\u2019"},
+{day:2,reading:"John 2",topic:"Water to Wine & Temple Cleansing",summary:"Jesus turns water into wine at Cana \u2014 His first sign. He drives out the money changers: \u2018Destroy this temple, and in three days I will raise it up.\u2019"},
+{day:3,reading:"John 3",topic:"You Must Be Born Again",summary:"Jesus tells Nicodemus about the new birth. \u2018For God so loved the world, that He gave His only Son.\u2019 John the Baptist: \u2018He must increase, I must decrease.\u2019"},
+{day:4,reading:"John 4",topic:"The Woman at the Well",summary:"Jesus crosses cultural barriers to offer living water to the Samaritan woman. \u2018God is spirit, and those who worship Him must worship in spirit and truth.\u2019"},
+{day:5,reading:"John 5",topic:"Healing at the Pool & the Son\u2019s Authority",summary:"Jesus heals the man at Bethesda on the Sabbath and claims equality with the Father. \u2018The Son gives life to whom He will.\u2019 The religious leaders seek to kill Him."},
+{day:6,reading:"John 1\u20135",topic:"Phase 1 Re-Read (Part 1)",summary:"Re-read the first five chapters. Watch the themes emerge: the Word made flesh, new birth, living water, and the authority of the Son. Let it sink deeper."},
+{day:7,reading:"John 1\u20135",topic:"Phase 1 Re-Read (Part 2)",summary:"Second pass through John 1\u20135. What did you miss the first time? What is the Spirit highlighting? Journal what stands out."},
+{day:8,reading:"John 6",topic:"Bread of Life",ph:2,summary:"Jesus feeds the 5,000, walks on water, and declares: \u2018I am the bread of life. Whoever comes to me shall not hunger.\u2019 Many disciples turn back. Peter stays."},
+{day:9,reading:"John 7",topic:"Division Over Jesus",summary:"Jesus goes to the Feast of Tabernacles. The crowds are divided \u2014 some say He is the Prophet, others say the Christ. \u2018If anyone thirsts, let him come to me and drink.\u2019"},
+{day:10,reading:"John 8",topic:"The Light of the World",summary:"The woman caught in adultery. \u2018I am the light of the world.\u2019 Jesus confronts the Pharisees: \u2018Before Abraham was, I AM.\u2019 They pick up stones."},
+{day:11,reading:"John 9",topic:"Healing the Man Born Blind",summary:"Jesus heals a man blind from birth. The Pharisees interrogate him. \u2018One thing I do know: I was blind, but now I see.\u2019 Jesus reveals Himself as the Son of Man."},
+{day:12,reading:"John 10",topic:"The Good Shepherd",summary:"\u2018I am the good shepherd. The good shepherd lays down his life for the sheep.\u2019 Jesus claims oneness with the Father. \u2018I give them eternal life, and they will never perish.\u2019"},
+{day:13,reading:"John 6\u201310",topic:"Phase 2 Re-Read (Part 1)",summary:"Re-read John 6\u201310. The \u2018I AM\u2019 statements are building. Bread of life, light of the world, the good shepherd. Who is Jesus claiming to be?"},
+{day:14,reading:"John 6\u201310",topic:"Phase 2 Re-Read (Part 2)",summary:"Second pass through John 6\u201310. Pay attention to the responses \u2014 belief, division, hostility. How do people respond to Jesus today?"},
+{day:15,reading:"John 11",topic:"The Resurrection and the Life",ph:3,summary:"Lazarus dies. Jesus weeps. Then He calls Lazarus out of the tomb. \u2018I am the resurrection and the life. Whoever believes in me, though he die, yet shall he live.\u2019"},
+{day:16,reading:"John 12",topic:"The Triumphal Entry",summary:"Mary anoints Jesus\u2019 feet. The crowd shouts Hosanna as He enters Jerusalem on a donkey. \u2018Unless a grain of wheat falls into the earth and dies, it remains alone.\u2019"},
+{day:17,reading:"John 13",topic:"The Last Supper & Foot Washing",summary:"Jesus washes the disciples\u2019 feet \u2014 the King becomes the servant. \u2018A new commandment I give to you: love one another as I have loved you.\u2019 Judas departs into the night."},
+{day:18,reading:"John 14",topic:"The Way, the Truth, the Life",summary:"\u2018I am the way, the truth, and the life. No one comes to the Father except through me.\u2019 Jesus promises the Holy Spirit \u2014 the Helper who will be with them forever."},
+{day:19,reading:"John 15",topic:"The Vine and the Branches",summary:"\u2018I am the vine; you are the branches.\u2019 Abide in Him and bear fruit. \u2018Greater love has no one than this: that someone lay down his life for his friends.\u2019"},
+{day:20,reading:"John 11\u201315",topic:"Phase 3 Re-Read (Part 1)",summary:"Re-read John 11\u201315. The upper room discourse. Jesus prepares His disciples for what\u2019s coming \u2014 His death, the Spirit, and the command to love."},
+{day:21,reading:"John 11\u201315",topic:"Phase 3 Re-Read (Part 2)",summary:"Second pass through John 11\u201315. The vine, the foot washing, the promise of the Helper. What is Jesus asking of you in this season?"},
+{day:22,reading:"John 16",topic:"The Spirit of Truth",ph:4,summary:"Jesus warns of persecution and promises the Spirit will guide them into all truth. \u2018In the world you will have tribulation. But take heart; I have overcome the world.\u2019"},
+{day:23,reading:"John 17",topic:"Jesus\u2019 High Priestly Prayer",summary:"Jesus prays for Himself, His disciples, and all who will believe. \u2018Sanctify them in the truth; your word is truth.\u2019 He prays for their unity and protection."},
+{day:24,reading:"John 18",topic:"Betrayal and Arrest",summary:"Judas betrays Jesus in the garden. Peter draws his sword, then denies Jesus three times. Jesus stands before Pilate: \u2018My kingdom is not of this world.\u2019"},
+{day:25,reading:"John 19",topic:"The Crucifixion",summary:"Jesus is scourged, crowned with thorns, and crucified. \u2018It is finished.\u2019 The Lamb of God takes away the sin of the world. Joseph and Nicodemus bury Him."},
+{day:26,reading:"John 20",topic:"The Resurrection",summary:"The empty tomb. Mary sees the risen Lord. Jesus appears to the disciples and to Thomas. \u2018My Lord and my God!\u2019 \u2018Blessed are those who have not seen and yet have believed.\u2019"},
+{day:27,reading:"John 21",topic:"Restoration of Peter",summary:"Jesus appears at the Sea of Galilee. The miraculous catch. Three times He asks Peter: \u2018Do you love me?\u2019 Three times: \u2018Feed my sheep.\u2019 Peter is restored."},
+{day:28,reading:"John 16\u201321",topic:"Phase 4 Re-Read (Part 1)",summary:"Re-read John 16\u201321. The prayer, the cross, the empty tomb, the restoration. The whole gospel in six chapters."},
+{day:29,reading:"John 16\u201321",topic:"Phase 4 Re-Read (Part 2)",summary:"Second pass through John 16\u201321. Sit with the cross. Sit with the resurrection. What has changed in you over these 30 days?"},
+{day:30,reading:"John 1\u201321",topic:"Full Book Re-Read",summary:"Read the entire Gospel of John in one sitting. From \u2018In the beginning was the Word\u2019 to \u2018Feed my sheep.\u2019 You\u2019ve lived in this book for a month. Now see the whole picture."}
+];
+
+var WV={
+1:{r:“2 Corinthians 5:21”,t:“For our sake he made him to be sin who knew no sin, so that in him we might become the righteousness of God.”},
+8:{r:“1 Corinthians 9:27”,t:“But I discipline my body and keep it under control, lest after preaching to others I myself should be disqualified.”},
+15:{r:“1 Peter 5:8”,t:“Be sober-minded; be watchful. Your adversary the devil prowls around like a roaring lion, seeking someone to devour.”},
+22:{r:“2 Timothy 1:7”,t:“For God gave us a spirit not of fear but of power and love and self-control.”}
+};
+
+var CHECKS=[
+{k:“read”,l:“Read the passage”},
+{k:“pray”,l:“Pray & journal”},
+{k:“workout”,l:“Lift weights (3\u20135x/week)”},
+{k:“cardio”,l:“Cardio session (1x/week)”},
+{k:“danger”,l:“Stay Dangerous (1x/phase)”},
+{k:“abstain”,l:“Abstain from your one thing”},
+{k:“christ”,l:“Christ-centered activity at home”},
+{k:“marco”,l:“Marco Polo update”}
+];
+var CHECK_KEYS=CHECKS.map(function(c){return c.k});
+
+var SKB=“isi-john-v1”;
+var now=new Date();var S=new Date(now.getFullYear(),now.getMonth(),1);
+var SK=SKB+”-”+now.getFullYear()+”-”+(now.getMonth()+1);
+var VERS=[“ESV”,“NASB”,“NKJV”,“NIV”,“LSB”];
+var VK=“isi-version”;
+function gver(){try{var v=localStorage.getItem(VK);return VERS.indexOf(v)>=0?v:“ESV”}catch(e){return”ESV”}}
+function sver(v){try{localStorage.setItem(VK,v)}catch(e){}}
+var bv=gver();
+
+function gd(){var d=new Date().getDate();return Math.min(d,30)}
+function ia(){return true}
+function iu(){return false}
+function gv(d){for(var i=0,b=[22,15,8,1];i<b.length;i++)if(d>=b[i])return WV[b[i]];return WV[1]}
+function lc(){try{return JSON.parse(localStorage.getItem(SK))||{}}catch(e){return{}}}
+function sc(d){try{localStorage.setItem(SK,JSON.stringify(d))}catch(e){}}
+
+var cl=lc(),ed=null,sa=false,cd=gd(),act=ia(),first=true;
+
+function allDone(ch){for(var i=0;i<CHECK_KEYS.length;i++)if(!ch[CHECK_KEYS[i]])return false;return true}
+
+function render(){
+var a=document.getElementById(“app”),h=””,v=gv(cd),td=DAYS[cd-1];
+
+if(iu())h+=’<div style="border-radius:16px;background:rgba(120,53,15,.2);border:1px solid rgba(180,83,9,.3);padding:20px;text-align:center"><p style="font-size:18px;font-weight:600;color:#fde68a">John Challenge starts on the 1st</p><p style="font-size:14px;color:#a8a29e;margin-top:4px">The Gospel of John. Read it, re-read it, live it. Let\u2019s go, men.</p></div>’;
+
+if(act&&td){
+h+=’<div class="glow" style="border-radius:16px;border:1px solid rgba(217,119,6,.4);background:linear-gradient(to bottom right,rgba(41,37,36,.8),rgba(28,25,23,.9),rgba(28,25,23,1));padding:20px">’;
+h+=’<div style="display:flex;align-items:center;justify-content:space-between"><div>’;
+h+=’<p class="mono" style="font-size:12px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:.05em">Day ‘+cd+’ of 30 \u2014 Today</p>’;
+h+=’<h2 style="font-size:20px;font-weight:700;color:#fffbeb;margin-top:4px">’+td.reading+’</h2>’;
+h+=’<p style="font-size:14px;color:#a8a29e;margin-top:2px">’+td.topic+’</p></div>’;
+h+=’<div style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(120,53,15,.3);border:2px solid rgba(180,83,9,.5)"><span style="font-size:24px;font-weight:700;color:#fcd34d">’+cd+’</span></div></div>’;
+h+=’<a href="https://www.biblegateway.com/passage/?search='+encodeURIComponent(td.reading)+'&version='+bv+'" target="_blank" rel="noopener noreferrer" class="read-btn" style="margin-top:16px">\uD83D\uDCD6 Open Today\u2019s Reading</a>’;
+h+=’<div class="ver-toggle">’;for(var vi=0;vi<VERS.length;vi++)h+=’<button class="ver-btn'+(VERS[vi]===bv?' active':'')+'" onclick="sv(\''+VERS[vi]+'\')">’+VERS[vi]+’</button>’;
+h+=’</div></div>’;
+}
+
+if(v){h+=’<div style="border-radius:16px;background:rgba(28,25,23,.8);border:1px solid rgba(68,64,60,.4);padding:20px">’;
+h+=’<p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">This Phase\u2019s Memory Verse</p>’;
+h+=’<p style="font-size:16px;font-style:italic;line-height:1.625;color:#e7e5e4">\u201C’+v.t+’\u201D</p>’;
+h+=’<p style="font-size:14px;font-weight:600;color:#f59e0b;margin-top:8px">\u2014 ‘+v.r+’</p></div>’}
+
+var dayPr=act?Math.round(cd/30*100):(iu()?0:100);
+h+=’<div style="border-radius:16px;background:rgba(28,25,23,.6);border:1px solid rgba(68,64,60,.3);padding:20px">’;
+h+=’<div style="display:flex;justify-content:space-between;align-items:center"><p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em">Challenge Progress</p><span style="font-size:14px;font-weight:500;color:#a8a29e">Day ‘+cd+’ of 30</span></div>’;
+h+=’<div class="pb-bg" style="margin-top:12px"><div class="pb-fill" style="width:'+dayPr+'%"></div></div>’;
+h+=’<p style="font-size:12px;color:#78716c;margin-top:12px">’+(30-cd)+’ days remaining</p></div>’;
+
+h+=’<div>’;
+h+=’<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><h2 style="font-size:18px;font-weight:700;color:#e7e5e4">Reading Schedule</h2>’;
+h+=’<button onclick="tsa()" style="font-size:12px;font-weight:500;color:#f59e0b;padding:4px 0">’+(sa?“Show less”:“Show all 30 days”)+’</button></div>’;
+
+var vis=sa?DAYS:DAYS.slice(0,Math.min(cd+2,30));
+for(var i=0;i<vis.length;i++){
+var d=vis[i];
+if(d.ph&&d.day>1){var wv=WV[d.day]||{};
+h+=’<div class="wd"><div class="wl"></div><span class="mono" style="font-size:12px;color:#78716c;font-weight:600;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap">Phase ‘+d.ph+(wv?’ \u2022 Memorize: ‘+wv.r:’’)+’</span><div class="wl"></div></div>’}
+h+=rd(d);
+}
+h+=’</div>’;
+
+h+=’<footer style="padding-top:32px;padding-bottom:8px;display:flex;align-items:center;justify-content:center;gap:12px;color:#57534e">’;
+h+=’<span style="font-size:12px;font-style:italic">\u201CAs iron sharpens iron, so one person sharpens another.\u201D</span>’;
+h+=’<span style="color:#44403c">\u2022</span><span style="font-size:12px">Proverbs 27:17</span></footer>’;
+
+a.innerHTML=h;
+if(first&&act){first=false;ed=cd;render()}
+}
+
+function rd(d){
+var dk=“day-”+d.day,ch=cl[dk]||{},ad=allDone(ch),it=act&&d.day===cd,io=ed===d.day;
+var cls=it?“card-today”:ad?“card-done”:“card”;
+var h=’<div class="'+cls+'" style="margin-top:12px"><button class="card-btn" onclick="td2('+d.day+')">’;
+h+=’<div class=“day-circle ‘+(it?“dc-today”:ad?“dc-done”:“dc-def”)+’”>’+(ad?”\u2713”:d.day)+’</div>’;
+h+=’<div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">’;
+h+=’<span style=“font-weight:600;font-size:16px;color:’+(it?”#fef3c7”:”#e7e5e4”)+’”>’+d.reading+’</span>’;
+if(it)h+=’<span class="badge b-today">TODAY</span>’;
+if(ad&&!it)h+=’<span class="badge b-done">DONE</span>’;
+h+=’</div><p style="font-size:14px;color:#a8a29e;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">’+d.topic+’</p></div>’;
+h+=’<svg class=“chevron’+(io?” chevron-open”:””)+’” viewBox=“0 0 20 20” fill=“currentColor”><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>’;
+h+=’</button>’;
+
+if(io){
+h+=’<div class="expand anim"><div style="border-top:1px solid rgba(68,64,60,.5);padding-top:16px"></div>’;
+h+=’<p style="font-size:14px;line-height:1.625;color:#d6d3d1">’+d.summary+’</p>’;
+h+=’<a href="https://www.biblegateway.com/passage/?search='+encodeURIComponent(d.reading)+'&version='+bv+'" target="_blank" rel="noopener noreferrer" class="read-btn">\uD83D\uDCDC Read ‘+d.reading+’ (’+bv+’)</a>’;
+h+=’<div class="cl-box">’;
+h+=’<p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Daily Checklist</p>’;
+for(var ci=0;ci<CHECKS.length;ci++)h+=rc(dk,CHECKS[ci].k,CHECKS[ci].l,ch);
+h+=’</div></div>’;
+}
+h+=’</div>’;return h;
+}
+
+function rc(dk,f,lb,ch){
+var on=!!ch[f];
+return ‘<button class="check-btn" onclick="tc(\''+dk+'\',\''+f+'\')"><span class=“cb’+(on?” on”:””)+’”>’+
+(on?’<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>’:””)+
+‘</span><span class=“cl’+(on?” on”:””)+’”>’+lb+’</span></button>’;
+}
+
+function td2(n){ed=ed===n?null:n;render()}
+function tsa(){sa=!sa;render()}
+function tc(dk,f){if(!cl[dk])cl[dk]={};cl[dk][f]=!cl[dk][f];sc(cl);render()}
+function sv(v){bv=v;sver(v);render()}
+render();
+</script>
+
+</body>
+</html>
