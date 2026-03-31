@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Iron Sharpens Iron — Plan Builder</title>
+<meta name="theme-color" content="#0c0a09">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared/style.css">
+<style>
+.field{margin-top:16px}
+.field label{display:block;font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+.field input,.field textarea,.field select{width:100%;background:#1c1917;border:1px solid rgba(68,64,60,.5);border-radius:10px;padding:10px 14px;color:#e7e5e4;font-family:'Crimson Pro',Georgia,serif;font-size:15px;outline:none;transition:border-color .2s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:rgba(180,83,9,.6)}
+.field textarea{min-height:80px;resize:vertical}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20' fill='%2378716c'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
+.day-row{display:flex;gap:8px;align-items:flex-start;margin-top:8px;padding:12px;background:rgba(28,25,23,.6);border:1px solid rgba(68,64,60,.3);border-radius:12px}
+.day-row .day-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:#292524;color:#a8a29e;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;margin-top:4px}
+.day-row .day-fields{flex:1;min-width:0}
+.day-row input{margin-top:4px}
+.phase-marker{font-size:11px;color:#fcd34d;background:rgba(180,83,9,.3);padding:2px 8px;border-radius:6px;display:inline-block;margin-top:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:14px;transition:all .2s;cursor:pointer;border:none;font-family:'Crimson Pro',Georgia,serif}
+.btn-primary{background:#b45309;color:#fffbeb}.btn-primary:hover{background:#d97706}
+.btn-secondary{background:rgba(41,37,36,.6);color:#e7e5e4;border:1px solid rgba(68,64,60,.4)}.btn-secondary:hover{background:rgba(68,64,60,.6)}
+.btn-row{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.add-day-btn{width:100%;padding:12px;border-radius:12px;border:1px dashed rgba(68,64,60,.5);color:#78716c;font-size:14px;margin-top:8px;transition:all .2s}
+.add-day-btn:hover{border-color:rgba(180,83,9,.4);color:#f59e0b}
+.check-row{display:flex;align-items:center;gap:8px;margin-top:6px}
+.check-row input{flex:1}
+.check-row button{flex-shrink:0;color:#78716c;padding:4px}
+.check-row button:hover{color:#f87171}
+.verse-row{display:flex;gap:8px;margin-top:8px;align-items:flex-end}
+.verse-row .field{flex:1;margin-top:0}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#292524;color:#4ade80;font-size:14px;font-weight:600;padding:10px 20px;border-radius:12px;border:1px solid rgba(74,222,128,.3);opacity:0;transition:all .3s;pointer-events:none;z-index:100}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header class="header-bg">
+<div class="header-inner">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <div style="width:40px;height:40px;border-radius:12px;background:rgba(120,53,15,.3);border:1px solid rgba(180,83,9,.4);display:flex;align-items:center;justify-content:center"><span style="font-size:20px">🛠️</span></div>
+    <div>
+      <h1 style="font-size:24px;font-weight:700;color:#fffbeb;line-height:1.25;letter-spacing:-.025em">Plan Builder</h1>
+      <p class="mono" style="font-size:12px;color:#a8a29e;font-weight:500;letter-spacing:.025em">CREATE A NEW READING PLAN</p>
+    </div>
+  </div>
+  <a href="/" style="font-size:14px;color:#a8a29e;display:inline-flex;align-items:center;gap:6px">&larr; Back to plans</a>
+</div>
+</header>
+
+<div class="wrap" id="builder">
+  <div class="field">
+    <label>Plan Title</label>
+    <input type="text" id="planTitle" placeholder="e.g. Gospel of Mark">
+  </div>
+  <div class="field">
+    <label>Subtitle</label>
+    <input type="text" id="planSubtitle" placeholder="e.g. GOSPEL OF MARK — 30-DAY CHALLENGE">
+  </div>
+  <div class="field">
+    <label>Storage Key (unique, no spaces)</label>
+    <input type="text" id="planKey" placeholder="e.g. isi-mark-v1">
+  </div>
+
+  <div class="field">
+    <label>Checklist Items</label>
+    <div id="checksList"></div>
+    <button class="add-day-btn" onclick="addCheck()">+ Add checklist item</button>
+  </div>
+
+  <div class="field">
+    <label>Memory Verses (one per phase — enter the day # each phase starts)</label>
+    <div id="versesList"></div>
+    <button class="add-day-btn" onclick="addVerse()">+ Add memory verse</button>
+  </div>
+
+  <div class="field">
+    <label>Reading Schedule</label>
+    <div id="daysList"></div>
+    <button class="add-day-btn" onclick="addDay()">+ Add day</button>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="exportConfig()">Export config.js</button>
+    <button class="btn btn-secondary" onclick="exportFull()">Export full index.html</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var days = [];
+var checks = [
+  {k:"read",l:"Read the passage"},
+  {k:"pray",l:"Pray & journal"},
+  {k:"workout",l:"Workout (3-5x/week)"},
+  {k:"abstain",l:"Abstain from your one thing"},
+  {k:"marco",l:"Marco Polo update"}
+];
+var verses = [{day:1,ref:"",text:""}];
+
+function renderChecks() {
+  var el = document.getElementById("checksList");
+  var h = "";
+  for (var i = 0; i < checks.length; i++) {
+    h += '<div class="check-row">';
+    h += '<input type="text" value="' + esc(checks[i].k) + '" placeholder="key" style="max-width:80px;font-family:JetBrains Mono,monospace;font-size:12px" onchange="checks[' + i + '].k=this.value">';
+    h += '<input type="text" value="' + esc(checks[i].l) + '" placeholder="Label" onchange="checks[' + i + '].l=this.value">';
+    h += '<button onclick="checks.splice(' + i + ',1);renderChecks()">&times;</button>';
+    h += '</div>';
+  }
+  el.innerHTML = h;
+}
+
+function addCheck() {
+  checks.push({k:"item" + checks.length, l:""});
+  renderChecks();
+}
+
+function renderVerses() {
+  var el = document.getElementById("versesList");
+  var h = "";
+  for (var i = 0; i < verses.length; i++) {
+    h += '<div class="verse-row">';
+    h += '<div class="field"><label>Phase starts Day</label><input type="number" value="' + verses[i].day + '" min="1" max="30" style="max-width:70px" onchange="verses[' + i + '].day=parseInt(this.value)"></div>';
+    h += '<div class="field"><label>Reference</label><input type="text" value="' + esc(verses[i].ref) + '" placeholder="e.g. Mark 10:45" onchange="verses[' + i + '].ref=this.value"></div>';
+    h += '<div class="field"><label>Text</label><input type="text" value="' + esc(verses[i].text) + '" placeholder="Verse text..." onchange="verses[' + i + '].text=this.value"></div>';
+    h += '<button onclick="verses.splice(' + i + ',1);renderVerses()" style="color:#78716c;margin-bottom:6px">&times;</button>';
+    h += '</div>';
+  }
+  el.innerHTML = h;
+}
+
+function addVerse() {
+  var lastDay = verses.length > 0 ? verses[verses.length - 1].day + 7 : 1;
+  verses.push({day: Math.min(lastDay, 30), ref: "", text: ""});
+  renderVerses();
+}
+
+function renderDays() {
+  var el = document.getElementById("daysList");
+  var h = "";
+  for (var i = 0; i < days.length; i++) {
+    var d = days[i];
+    var isPhaseStart = verses.some(function(v) { return v.day === d.day; }) && d.day > 1;
+    h += '<div class="day-row">';
+    h += '<div class="day-num">' + d.day + '</div>';
+    h += '<div class="day-fields">';
+    if (isPhaseStart) h += '<span class="phase-marker">Phase start</span>';
+    h += '<input type="text" value="' + esc(d.reading) + '" placeholder="Reading (e.g. Mark 1)" onchange="days[' + i + '].reading=this.value">';
+    h += '<input type="text" value="' + esc(d.topic) + '" placeholder="Topic" onchange="days[' + i + '].topic=this.value" style="margin-top:4px">';
+    h += '<input type="text" value="' + esc(d.summary) + '" placeholder="Summary (1-2 sentences)" onchange="days[' + i + '].summary=this.value" style="margin-top:4px">';
+    h += '</div></div>';
+  }
+  el.innerHTML = h;
+}
+
+function addDay() {
+  var n = days.length + 1;
+  days.push({day: n, reading: "", topic: "", summary: ""});
+  renderDays();
+  // Scroll to bottom
+  var el = document.getElementById("daysList");
+  el.lastChild.scrollIntoView({behavior: "smooth"});
+}
+
+function esc(s) {
+  return (s || "").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+function escJS(s) {
+  return (s || "").replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n")
+    .replace(/\u2018/g, "\\u2018").replace(/\u2019/g, "\\u2019")
+    .replace(/\u201C/g, "\\u201C").replace(/\u201D/g, "\\u201D")
+    .replace(/\u2014/g, "\\u2014").replace(/\u2013/g, "\\u2013");
+}
+
+function buildConfig() {
+  var title = document.getElementById("planTitle").value || "Untitled";
+  var subtitle = document.getElementById("planSubtitle").value || title.toUpperCase() + " \u2014 30-DAY CHALLENGE";
+  var key = document.getElementById("planKey").value || "isi-custom-v1";
+  var total = days.length;
+
+  var daysJS = "[\n";
+  for (var i = 0; i < days.length; i++) {
+    var d = days[i];
+    var phNum = 0;
+    for (var vi = 0; vi < verses.length; vi++) {
+      if (verses[vi].day === d.day) { phNum = vi + 1; break; }
+    }
+    daysJS += '{day:' + d.day + ',reading:"' + escJS(d.reading) + '",topic:"' + escJS(d.topic) + '"';
+    if (phNum) daysJS += ',ph:' + phNum;
+    daysJS += ',summary:"' + escJS(d.summary) + '"}';
+    if (i < days.length - 1) daysJS += ",\n";
+  }
+  daysJS += "\n]";
+
+  var wvJS = "{\n";
+  for (var vi2 = 0; vi2 < verses.length; vi2++) {
+    var v = verses[vi2];
+    wvJS += v.day + ':{r:"' + escJS(v.ref) + '",t:"' + escJS(v.text) + '"}';
+    if (vi2 < verses.length - 1) wvJS += ",\n";
+  }
+  wvJS += "\n}";
+
+  var chJS = "[\n";
+  for (var ci = 0; ci < checks.length; ci++) {
+    chJS += '  {k:"' + escJS(checks[ci].k) + '",l:"' + escJS(checks[ci].l) + '"}';
+    if (ci < checks.length - 1) chJS += ",\n";
+  }
+  chJS += "\n]";
+
+  return '// Iron Sharpens Iron v2.0.0 \u2014 ' + title + ' Config\n' +
+    'window.PLAN = {\n' +
+    '  title: "' + escJS(title) + '",\n' +
+    '  subtitle: "' + escJS(subtitle) + '",\n' +
+    '  storageKey: "' + escJS(key) + '",\n' +
+    '  totalDays: ' + total + ',\n' +
+    '  days: ' + daysJS + ',\n' +
+    '  verses: ' + wvJS + ',\n' +
+    '  checks: ' + chJS + '\n' +
+    '};\n';
+}
+
+function download(filename, content) {
+  var blob = new Blob([content], {type: "text/plain"});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function exportConfig() {
+  if (days.length === 0) { showToast("Add at least one day first"); return; }
+  var config = buildConfig();
+  download("config.js", config);
+  showToast("config.js exported!");
+}
+
+function exportFull() {
+  if (days.length === 0) { showToast("Add at least one day first"); return; }
+  var title = document.getElementById("planTitle").value || "Untitled";
+  var subtitle = document.getElementById("planSubtitle").value || title.toUpperCase() + " \u2014 30-DAY CHALLENGE";
+  var config = buildConfig();
+
+  // Fetch the shared app.js content and inline it
+  fetch("/shared/app.js").then(function(r) { return r.text(); }).then(function(appJS) {
+    var html = '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
+      '<meta charset="UTF-8">\n' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">\n' +
+      '<title>Iron Sharpens Iron \u2014 ' + title + '</title>\n' +
+      '<meta name="theme-color" content="#0c0a09">\n' +
+      '<meta name="apple-mobile-web-app-capable" content="yes">\n' +
+      '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+      '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
+      '<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">\n' +
+      '<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">\n' +
+      '<style>\n' + document.querySelector('link[href$="style.css"]').sheet.cssRules.length + '</style>\n';
+
+    // Just fetch the CSS too
+    fetch("/shared/style.css").then(function(r2) { return r2.text(); }).then(function(cssText) {
+      html = '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
+        '<meta charset="UTF-8">\n' +
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">\n' +
+        '<title>Iron Sharpens Iron \u2014 ' + title + '</title>\n' +
+        '<meta name="theme-color" content="#0c0a09">\n' +
+        '<meta name="apple-mobile-web-app-capable" content="yes">\n' +
+        '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
+        '<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">\n' +
+        '<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">\n' +
+        '<style>\n' + cssText + '\n</style>\n' +
+        '</head>\n<body>\n' +
+        '<header class="header-bg">\n<div class="header-inner">\n' +
+        '  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">\n' +
+        '    <div style="width:40px;height:40px;border-radius:12px;background:rgba(120,53,15,.3);border:1px solid rgba(180,83,9,.4);display:flex;align-items:center;justify-content:center"><span style="font-size:20px">\u2694\uFE0F</span></div>\n' +
+        '    <div>\n' +
+        '      <h1 style="font-size:24px;font-weight:700;color:#fffbeb;line-height:1.25;letter-spacing:-.025em">Iron Sharpens Iron</h1>\n' +
+        '      <p class="mono" style="font-size:12px;color:#a8a29e;font-weight:500;letter-spacing:.025em">' + subtitle + '</p>\n' +
+        '    </div>\n  </div>\n' +
+        '  <a href="https://sharpiron.org" target="_blank" rel="noopener noreferrer" style="font-size:14px;color:#a8a29e;line-height:1.625;display:inline-flex;align-items:center;gap:6px">sharpiron.org</a>\n' +
+        '</div>\n</header>\n' +
+        '<div class="wrap" id="app"></div>\n' +
+        '<script>\n' + config + '\n' + appJS + '\n<\/script>\n' +
+        '</body>\n</html>';
+
+      download("index.html", html);
+      showToast("Full index.html exported!");
+    });
+  }).catch(function() {
+    // Fallback: just export config if we can't fetch shared files
+    download("config.js", config);
+    showToast("Exported config.js (couldn't inline shared files)");
+  });
+}
+
+function showToast(msg) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(function() { t.classList.remove("show"); }, 2000);
+}
+
+// Initialize
+renderChecks();
+renderVerses();
+renderDays();
+
+// Start with a few empty days
+for (var i = 0; i < 5; i++) addDay();
+</script>
+</body>
+</html>
