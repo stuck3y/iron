@@ -1,0 +1,55 @@
+// Iron Sharpens Iron v2.0.0 — Proverbs Config
+window.PLAN = {
+  title: "Proverbs",
+  subtitle: "PROVERBS — 30-DAY CHALLENGE",
+  storageKey: "isi-proverbs-v2",
+  totalDays: 30,
+  days: [
+{day:1,reading:"Proverbs 1",topic:"The Beginning of Knowledge",ph:1,summary:"Solomon sets the stage: the fear of the Lord is the beginning of knowledge. Wisdom cries out in the streets \u2014 will you listen or turn away?"},
+{day:2,reading:"Proverbs 2",topic:"The Value of Wisdom",summary:"Seek wisdom like silver and search for it like hidden treasure. God gives wisdom, and from His mouth come knowledge and understanding."},
+{day:3,reading:"Proverbs 3",topic:"Trust in the Lord",summary:"Trust in the Lord with all your heart and lean not on your own understanding. In all your ways acknowledge Him, and He will make your paths straight."},
+{day:4,reading:"Proverbs 4",topic:"Guard Your Heart",summary:"Above all else, guard your heart, for everything you do flows from it. The path of the righteous is like the morning sun, shining brighter until full day."},
+{day:5,reading:"Proverbs 5",topic:"Warning Against Adultery",summary:"Solomon warns his son about the seductive woman and the destruction of unfaithfulness. Drink water from your own cistern \u2014 rejoice in the wife of your youth."},
+{day:6,reading:"Proverbs 6",topic:"Warnings Against Folly",summary:"Go to the ant, you sluggard. Six things the Lord hates, seven that are an abomination. Warnings against laziness, dishonesty, and sexual sin."},
+{day:7,reading:"Proverbs 7",topic:"The Wayward Woman",summary:"A vivid narrative warning against temptation. The young man lacks sense and walks into the trap. Her house is a highway to the grave."},
+{day:8,reading:"Proverbs 8",topic:"Wisdom\u2019s Call",ph:2,summary:"Wisdom speaks: she was there before creation, beside God as a master craftsman. Whoever finds wisdom finds life and receives favor from the Lord."},
+{day:9,reading:"Proverbs 9",topic:"Two Invitations",summary:"Wisdom has built her house and set her table. Folly also calls out. Two invitations, two paths \u2014 life or death. The fear of the Lord is the beginning of wisdom."},
+{day:10,reading:"Proverbs 10",topic:"Proverbs of Solomon Begin",summary:"The contrast begins: wise son vs. foolish son, righteousness vs. wickedness, diligence vs. laziness. The mouth of the righteous is a fountain of life."},
+{day:11,reading:"Proverbs 11",topic:"Integrity and Generosity",summary:"A false balance is an abomination. The integrity of the upright guides them. Whoever refreshes others will be refreshed. The generous soul will prosper."},
+{day:12,reading:"Proverbs 12",topic:"Discipline and Truth",summary:"Whoever loves discipline loves knowledge. The words of the wicked lie in wait for blood, but the speech of the upright rescues them. Truthful lips endure forever."},
+{day:13,reading:"Proverbs 13",topic:"Guarding Your Mouth",summary:"Whoever guards his mouth preserves his life. Wealth gained hastily will dwindle, but whoever gathers little by little will increase it."},
+{day:14,reading:"Proverbs 14",topic:"The Wise and the Foolish",summary:"The wise woman builds her house, but the foolish tears it down with her own hands. There is a way that seems right to a man, but its end is the way of death."},
+{day:15,reading:"Proverbs 15",topic:"A Gentle Answer",ph:3,summary:"A gentle answer turns away wrath, but a harsh word stirs up anger. The eyes of the Lord are everywhere. The prayer of the upright pleases Him."},
+{day:16,reading:"Proverbs 16",topic:"The Lord Directs Our Steps",summary:"The heart of man plans his way, but the Lord establishes his steps. Pride goes before destruction, and a haughty spirit before a fall."},
+{day:17,reading:"Proverbs 17",topic:"Friendship and Restraint",summary:"A friend loves at all times, and a brother is born for adversity. Even a fool who keeps silent is considered wise. Better a dry morsel with quiet than a feast with strife."},
+{day:18,reading:"Proverbs 18",topic:"The Power of Words",summary:"Death and life are in the power of the tongue. The name of the Lord is a strong tower; the righteous run into it and are safe."},
+{day:19,reading:"Proverbs 19",topic:"Patience and Kindness",summary:"Whoever is generous to the poor lends to the Lord. A man of great wrath will pay the penalty. Listen to advice and accept instruction."},
+{day:20,reading:"Proverbs 20",topic:"Justice and Sobriety",summary:"Wine is a mocker, strong drink a brawler. The Lord detests differing weights. Who can say, \u2018I have kept my heart pure\u2019?"},
+{day:21,reading:"Proverbs 21",topic:"The Lord Weighs the Heart",summary:"Every way of a man is right in his own eyes, but the Lord weighs the heart. The horse is made ready for the day of battle, but victory belongs to the Lord."},
+{day:22,reading:"Proverbs 22",topic:"A Good Name",ph:4,summary:"A good name is more desirable than great riches. Train up a child in the way he should go; even when he is old he will not depart from it."},
+{day:23,reading:"Proverbs 23",topic:"Warnings Against Excess",summary:"Do not wear yourself out to get rich. Do not envy sinners, but always be zealous for the fear of the Lord. Listen to your father who gave you life."},
+{day:24,reading:"Proverbs 24",topic:"Wisdom Builds the House",summary:"By wisdom a house is built, and through understanding it is established. Do not gloat when your enemy falls. If you faint in the day of adversity, your strength is small."},
+{day:25,reading:"Proverbs 25",topic:"Kings, Fools, and Self-Control",summary:"It is the glory of God to conceal things, but the glory of kings to search things out. Like a city breached without walls is a man who lacks self-control."},
+{day:26,reading:"Proverbs 26",topic:"Sluggards and Fools",summary:"Like snow in summer or rain in harvest, honor is not fitting for a fool. The sluggard buries his hand in the dish and will not even bring it back to his mouth."},
+{day:27,reading:"Proverbs 27",topic:"Iron Sharpens Iron",summary:"As iron sharpens iron, so one person sharpens another. Faithful are the wounds of a friend. Boast not about tomorrow, for you do not know what a day may bring."},
+{day:28,reading:"Proverbs 28",topic:"The Righteous Are Bold",summary:"The wicked flee when no one pursues, but the righteous are bold as a lion. Whoever conceals his transgressions will not prosper, but he who confesses them will find mercy."},
+{day:29,reading:"Proverbs 29",topic:"Discipline and Vision",summary:"Where there is no prophetic vision the people cast off restraint, but blessed is he who keeps the law. The fear of man lays a snare, but whoever trusts in the Lord is safe."},
+{day:30,reading:"Proverbs 30\u201331",topic:"Agur\u2019s Wisdom & The Noble Wife",summary:"Agur\u2019s humility before God. The words of King Lemuel\u2019s mother. The book closes with the portrait of the excellent wife \u2014 strength, dignity, and the fear of the Lord."}
+],
+  verses: {
+1:{r:"Proverbs 1:7",t:"The fear of the Lord is the beginning of knowledge; fools despise wisdom and instruction."},
+8:{r:"Proverbs 10:9",t:"Whoever walks in integrity walks securely, but he who makes his ways crooked will be found out."},
+15:{r:"Proverbs 16:9",t:"The heart of man plans his way, but the Lord establishes his steps."},
+22:{r:"Proverbs 21:31",t:"The horse is made ready for the day of battle, but the victory belongs to the Lord."}
+},
+  checks: [
+  {k:"read",l:"Read the passage"},
+  {k:"pray",l:"Pray & journal"},
+  {k:"workout",l:"Lift weights (3–5x/week)"},
+  {k:"cardio",l:"Cardio session (1x/week)"},
+  {k:"danger",l:"Stay Dangerous (1x/phase)"},
+  {k:"abstain",l:"Abstain from your one thing"},
+  {k:"christ",l:"Christ-centered activity at home"},
+  {k:"marco",l:"Marco Polo update"}
+]
+};
