@@ -1,0 +1,55 @@
+// Iron Sharpens Iron v2.0.0 — Gospel of John Config
+window.PLAN = {
+  title: "Gospel of John",
+  subtitle: "GOSPEL OF JOHN — 30-DAY CHALLENGE",
+  storageKey: "isi-john-v2",
+  totalDays: 30,
+  days: [
+{day:1,reading:"John 1",topic:"The Word Became Flesh",ph:1,summary:"In the beginning was the Word. John the Baptist testifies. Jesus calls His first disciples \u2014 Andrew, Peter, Philip, and Nathanael. \u2018We have found the Messiah.\u2019"},
+{day:2,reading:"John 2",topic:"Water to Wine & Temple Cleansing",summary:"Jesus turns water into wine at Cana \u2014 His first sign. He drives out the money changers: \u2018Destroy this temple, and in three days I will raise it up.\u2019"},
+{day:3,reading:"John 3",topic:"You Must Be Born Again",summary:"Jesus tells Nicodemus about the new birth. \u2018For God so loved the world, that He gave His only Son.\u2019 John the Baptist: \u2018He must increase, I must decrease.\u2019"},
+{day:4,reading:"John 4",topic:"The Woman at the Well",summary:"Jesus crosses cultural barriers to offer living water to the Samaritan woman. \u2018God is spirit, and those who worship Him must worship in spirit and truth.\u2019"},
+{day:5,reading:"John 5",topic:"Healing at the Pool & the Son\u2019s Authority",summary:"Jesus heals the man at Bethesda on the Sabbath and claims equality with the Father. \u2018The Son gives life to whom He will.\u2019 The religious leaders seek to kill Him."},
+{day:6,reading:"John 1\u20135",topic:"Phase 1 Re-Read (Part 1)",summary:"Re-read the first five chapters. Watch the themes emerge: the Word made flesh, new birth, living water, and the authority of the Son. Let it sink deeper."},
+{day:7,reading:"John 1\u20135",topic:"Phase 1 Re-Read (Part 2)",summary:"Second pass through John 1\u20135. What did you miss the first time? What is the Spirit highlighting? Journal what stands out."},
+{day:8,reading:"John 6",topic:"Bread of Life",ph:2,summary:"Jesus feeds the 5,000, walks on water, and declares: \u2018I am the bread of life. Whoever comes to me shall not hunger.\u2019 Many disciples turn back. Peter stays."},
+{day:9,reading:"John 7",topic:"Division Over Jesus",summary:"Jesus goes to the Feast of Tabernacles. The crowds are divided \u2014 some say He is the Prophet, others say the Christ. \u2018If anyone thirsts, let him come to me and drink.\u2019"},
+{day:10,reading:"John 8",topic:"The Light of the World",summary:"The woman caught in adultery. \u2018I am the light of the world.\u2019 Jesus confronts the Pharisees: \u2018Before Abraham was, I AM.\u2019 They pick up stones."},
+{day:11,reading:"John 9",topic:"Healing the Man Born Blind",summary:"Jesus heals a man blind from birth. The Pharisees interrogate him. \u2018One thing I do know: I was blind, but now I see.\u2019 Jesus reveals Himself as the Son of Man."},
+{day:12,reading:"John 10",topic:"The Good Shepherd",summary:"\u2018I am the good shepherd. The good shepherd lays down his life for the sheep.\u2019 Jesus claims oneness with the Father. \u2018I give them eternal life, and they will never perish.\u2019"},
+{day:13,reading:"John 6\u201310",topic:"Phase 2 Re-Read (Part 1)",summary:"Re-read John 6\u201310. The \u2018I AM\u2019 statements are building. Bread of life, light of the world, the good shepherd. Who is Jesus claiming to be?"},
+{day:14,reading:"John 6\u201310",topic:"Phase 2 Re-Read (Part 2)",summary:"Second pass through John 6\u201310. Pay attention to the responses \u2014 belief, division, hostility. How do people respond to Jesus today?"},
+{day:15,reading:"John 11",topic:"The Resurrection and the Life",ph:3,summary:"Lazarus dies. Jesus weeps. Then He calls Lazarus out of the tomb. \u2018I am the resurrection and the life. Whoever believes in me, though he die, yet shall he live.\u2019"},
+{day:16,reading:"John 12",topic:"The Triumphal Entry",summary:"Mary anoints Jesus\u2019 feet. The crowd shouts Hosanna as He enters Jerusalem on a donkey. \u2018Unless a grain of wheat falls into the earth and dies, it remains alone.\u2019"},
+{day:17,reading:"John 13",topic:"The Last Supper & Foot Washing",summary:"Jesus washes the disciples\u2019 feet \u2014 the King becomes the servant. \u2018A new commandment I give to you: love one another as I have loved you.\u2019 Judas departs into the night."},
+{day:18,reading:"John 14",topic:"The Way, the Truth, the Life",summary:"\u2018I am the way, the truth, and the life. No one comes to the Father except through me.\u2019 Jesus promises the Holy Spirit \u2014 the Helper who will be with them forever."},
+{day:19,reading:"John 15",topic:"The Vine and the Branches",summary:"\u2018I am the vine; you are the branches.\u2019 Abide in Him and bear fruit. \u2018Greater love has no one than this: that someone lay down his life for his friends.\u2019"},
+{day:20,reading:"John 11\u201315",topic:"Phase 3 Re-Read (Part 1)",summary:"Re-read John 11\u201315. The upper room discourse. Jesus prepares His disciples for what\u2019s coming \u2014 His death, the Spirit, and the command to love."},
+{day:21,reading:"John 11\u201315",topic:"Phase 3 Re-Read (Part 2)",summary:"Second pass through John 11\u201315. The vine, the foot washing, the promise of the Helper. What is Jesus asking of you in this season?"},
+{day:22,reading:"John 16",topic:"The Spirit of Truth",ph:4,summary:"Jesus warns of persecution and promises the Spirit will guide them into all truth. \u2018In the world you will have tribulation. But take heart; I have overcome the world.\u2019"},
+{day:23,reading:"John 17",topic:"Jesus\u2019 High Priestly Prayer",summary:"Jesus prays for Himself, His disciples, and all who will believe. \u2018Sanctify them in the truth; your word is truth.\u2019 He prays for their unity and protection."},
+{day:24,reading:"John 18",topic:"Betrayal and Arrest",summary:"Judas betrays Jesus in the garden. Peter draws his sword, then denies Jesus three times. Jesus stands before Pilate: \u2018My kingdom is not of this world.\u2019"},
+{day:25,reading:"John 19",topic:"The Crucifixion",summary:"Jesus is scourged, crowned with thorns, and crucified. \u2018It is finished.\u2019 The Lamb of God takes away the sin of the world. Joseph and Nicodemus bury Him."},
+{day:26,reading:"John 20",topic:"The Resurrection",summary:"The empty tomb. Mary sees the risen Lord. Jesus appears to the disciples and to Thomas. \u2018My Lord and my God!\u2019 \u2018Blessed are those who have not seen and yet have believed.\u2019"},
+{day:27,reading:"John 21",topic:"Restoration of Peter",summary:"Jesus appears at the Sea of Galilee. The miraculous catch. Three times He asks Peter: \u2018Do you love me?\u2019 Three times: \u2018Feed my sheep.\u2019 Peter is restored."},
+{day:28,reading:"John 16\u201321",topic:"Phase 4 Re-Read (Part 1)",summary:"Re-read John 16\u201321. The prayer, the cross, the empty tomb, the restoration. The whole gospel in six chapters."},
+{day:29,reading:"John 16\u201321",topic:"Phase 4 Re-Read (Part 2)",summary:"Second pass through John 16\u201321. Sit with the cross. Sit with the resurrection. What has changed in you over these 30 days?"},
+{day:30,reading:"John 1\u201321",topic:"Full Book Re-Read",summary:"Read the entire Gospel of John in one sitting. From \u2018In the beginning was the Word\u2019 to \u2018Feed my sheep.\u2019 You\u2019ve lived in this book for a month. Now see the whole picture."}
+],
+  verses: {
+1:{r:"2 Corinthians 5:21",t:"For our sake he made him to be sin who knew no sin, so that in him we might become the righteousness of God."},
+8:{r:"1 Corinthians 9:27",t:"But I discipline my body and keep it under control, lest after preaching to others I myself should be disqualified."},
+15:{r:"1 Peter 5:8",t:"Be sober-minded; be watchful. Your adversary the devil prowls around like a roaring lion, seeking someone to devour."},
+22:{r:"2 Timothy 1:7",t:"For God gave us a spirit not of fear but of power and love and self-control."}
+},
+  checks: [
+  {k:"read",l:"Read the passage"},
+  {k:"pray",l:"Pray & journal"},
+  {k:"workout",l:"Lift weights (3–5x/week)"},
+  {k:"cardio",l:"Cardio session (1x/week)"},
+  {k:"danger",l:"Stay Dangerous (1x/phase)"},
+  {k:"abstain",l:"Abstain from your one thing"},
+  {k:"christ",l:"Christ-centered activity at home"},
+  {k:"marco",l:"Marco Polo update"}
+]
+};
