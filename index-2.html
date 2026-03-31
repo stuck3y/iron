@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Iron Sharpens Iron — Reading Plans</title>
+<meta name="description" content="Iron Sharpens Iron: 30-day Bible reading and fitness challenges for men.">
+<meta name="theme-color" content="#0c0a09">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0c0a09;color:#e7e5e4;font-family:'Crimson Pro',Georgia,serif;-webkit-font-smoothing:antialiased;min-height:100vh;
+  background-image:radial-gradient(ellipse at top,rgba(120,80,40,.08) 0%,transparent 60%)}
+.mono{font-family:'JetBrains Mono',monospace}
+a{text-decoration:none;color:inherit}
+button{background:none;border:none;cursor:pointer;font-family:inherit;color:inherit}
+.header-bg{background:linear-gradient(135deg,rgba(120,80,30,.15) 0%,transparent 50%,rgba(80,60,30,.1) 100%)}
+.header-inner{max-width:512px;margin:0 auto;padding:48px 20px 32px}
+.wrap{max-width:512px;margin:0 auto;padding:0 20px 64px}
+.plan{display:flex;align-items:flex-start;gap:0;border-radius:16px;border:1px solid rgba(68,64,60,.4);background:rgba(28,25,23,.6);transition:all .2s;margin-top:12px;overflow:hidden}
+.plan:hover{border-color:rgba(180,83,9,.4);background:rgba(41,37,36,.6)}
+.plan-link{flex:1;padding:20px;display:block;min-width:0}
+.plan-title{font-size:18px;font-weight:700;color:#fffbeb}
+.plan-sub{font-size:14px;color:#a8a29e;margin-top:4px}
+.plan-tag{display:inline-block;font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;margin-top:8px}
+.tag-book{background:rgba(120,53,15,.3);border:1px solid rgba(180,83,9,.3);color:#fcd34d}
+.share-btn{display:flex;align-items:center;justify-content:center;width:52px;flex-shrink:0;border-left:1px solid rgba(68,64,60,.3);color:#78716c;transition:all .2s;align-self:stretch}
+.share-btn:hover{color:#f59e0b;background:rgba(120,53,15,.15)}
+.share-btn.copied{color:#4ade80}
+.date-picker{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:14px 16px;border-radius:12px;background:rgba(28,25,23,.6);border:1px solid rgba(68,64,60,.3)}
+.date-picker label{font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.date-picker input{background:#1c1917;border:1px solid rgba(68,64,60,.5);border-radius:8px;padding:8px 12px;color:#fcd34d;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;outline:none;flex:1;min-width:0;transition:border-color .2s}
+.date-picker input:focus{border-color:rgba(180,83,9,.6)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#292524;color:#4ade80;font-size:14px;font-weight:600;padding:10px 20px;border-radius:12px;border:1px solid rgba(74,222,128,.3);opacity:0;transition:all .3s;pointer-events:none;z-index:100}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header class="header-bg">
+<div class="header-inner">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <div style="width:48px;height:48px;border-radius:14px;background:rgba(120,53,15,.3);border:1px solid rgba(180,83,9,.4);display:flex;align-items:center;justify-content:center"><span style="font-size:24px">⚔️</span></div>
+    <div>
+      <h1 style="font-size:28px;font-weight:700;color:#fffbeb;line-height:1.25;letter-spacing:-.025em">Iron Sharpens Iron</h1>
+      <p class="mono" style="font-size:12px;color:#a8a29e;font-weight:500;letter-spacing:.025em">30-DAY READING PLANS</p>
+    </div>
+  </div>
+  <p style="font-size:15px;color:#a8a29e;line-height:1.6;margin-top:8px;font-style:italic">"As iron sharpens iron, so one person sharpens another." — Proverbs 27:17</p>
+</div>
+</header>
+
+<div class="wrap">
+  <p style="font-size:14px;color:#78716c;margin-bottom:4px" class="mono">CHOOSE YOUR PLAN</p>
+
+  <div class="date-picker">
+    <label for="startDate">Start date</label>
+    <input type="date" id="startDate">
+  </div>
+
+  <div class="plan">
+    <a href="/acts/" class="plan-link" data-path="acts">
+      <div class="plan-title">Acts</div>
+      <div class="plan-sub">The birth of the church. 28 chapters + full re-read.</div>
+      <span class="plan-tag tag-book">28 CHAPTERS</span>
+    </a>
+    <button class="share-btn" onclick="share('acts','Acts')" aria-label="Share Acts plan">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    </button>
+  </div>
+
+  <div class="plan">
+    <a href="/proverbs/" class="plan-link" data-path="proverbs">
+      <div class="plan-title">Proverbs</div>
+      <div class="plan-sub">The wisdom of Solomon. One chapter a day.</div>
+      <span class="plan-tag tag-book">31 CHAPTERS</span>
+    </a>
+    <button class="share-btn" onclick="share('proverbs','Proverbs')" aria-label="Share Proverbs plan">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    </button>
+  </div>
+
+  <div class="plan">
+    <a href="/john/" class="plan-link" data-path="john">
+      <div class="plan-title">Gospel of John</div>
+      <div class="plan-sub">Read, re-read, and live in the Gospel. Phase re-reads built in.</div>
+      <span class="plan-tag tag-book">21 CHAPTERS</span>
+    </a>
+    <button class="share-btn" onclick="share('john','Gospel of John')" aria-label="Share John plan">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    </button>
+  </div>
+
+  <div class="plan">
+    <a href="/luke/" class="plan-link" data-path="luke">
+      <div class="plan-title">Gospel of Luke</div>
+      <div class="plan-sub">The Gospel for the outcast. 24 chapters with phase re-reads.</div>
+      <span class="plan-tag tag-book">24 CHAPTERS</span>
+    </a>
+    <button class="share-btn" onclick="share('luke','Gospel of Luke')" aria-label="Share Luke plan">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    </button>
+  </div>
+
+  <div class="plan">
+    <a href="/matthew/" class="plan-link" data-path="matthew">
+      <div class="plan-title">Gospel of Matthew</div>
+      <div class="plan-sub">The Gospel of the King. One chapter a day + full re-read.</div>
+      <span class="plan-tag tag-book">28 CHAPTERS</span>
+    </a>
+    <button class="share-btn" onclick="share('matthew','Gospel of Matthew')" aria-label="Share Matthew plan">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    </button>
+  </div>
+
+  <div class="plan">
+    <a href="/psalms/" class="plan-link" data-path="psalms">
+      <div class="plan-title">Psalms</div>
+      <div class="plan-sub">30 curated Psalms. Prayers, praise, and raw honesty before God.</div>
+      <span class="plan-tag tag-book">30 SELECTED</span>
+    </a>
+    <button class="share-btn" onclick="share('psalms','Psalms')" aria-label="Share Psalms plan">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    </button>
+  </div>
+
+  <div class="plan">
+    <a href="/select/" class="plan-link" data-path="select">
+      <div class="plan-title">Selected Scriptures</div>
+      <div class="plan-sub">Key passages across the Bible. Genesis to Revelation in 30 days.</div>
+      <span class="plan-tag tag-book">30 PASSAGES</span>
+    </a>
+    <button class="share-btn" onclick="share('select','Selected Scriptures')" aria-label="Share Selected Scriptures plan">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    </button>
+  </div>
+
+  <footer style="padding-top:40px;padding-bottom:8px;text-align:center">
+    <a href="https://sharpiron.org" target="_blank" rel="noopener noreferrer" style="font-size:14px;color:#78716c;display:inline-flex;align-items:center;gap:6px;transition:color .2s" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#78716c'">sharpiron.org <svg style="width:12px;height:12px" viewBox="0 0 16 16" fill="none"><path d="M5 3h8v8M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function getStartDate() {
+  return document.getElementById('startDate').value;
+}
+
+function buildUrl(path) {
+  var sd = getStartDate();
+  return window.location.origin + '/' + path + '/' + (sd ? '?start=' + sd : '');
+}
+
+// Update plan links when date changes
+function updateLinks() {
+  var links = document.querySelectorAll('.plan-link');
+  links.forEach(function(link) {
+    var path = link.getAttribute('data-path');
+    if (path) link.href = '/' + path + '/' + (getStartDate() ? '?start=' + getStartDate() : '');
+  });
+}
+
+function share(path, name) {
+  var url = buildUrl(path);
+  var text = 'Iron Sharpens Iron: ' + name + ' \u2014 30-Day Challenge';
+
+  if (navigator.share) {
+    navigator.share({ title: text, url: url }).catch(function(){});
+  } else {
+    navigator.clipboard.writeText(url).then(function() {
+      showToast('Link copied!');
+    }).catch(function() {
+      showToast('Link copied!');
+    });
+  }
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2000);
+}
+
+// Default to today
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0');
+var yyyy = today.getFullYear();
+document.getElementById('startDate').value = yyyy + '-' + mm + '-' + dd;
+document.getElementById('startDate').addEventListener('change', updateLinks);
+updateLinks();
+</script>
+</body>
+</html>
