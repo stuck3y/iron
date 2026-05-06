@@ -12,6 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/shared/logo.png">
+<link rel="apple-touch-icon" href="/shared/logo.png">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0c0a09;color:#e7e5e4;font-family:'Crimson Pro',Georgia,serif;-webkit-font-smoothing:antialiased;min-height:100vh;
@@ -21,6 +23,8 @@ a{text-decoration:none;color:inherit}
 button{background:none;border:none;cursor:pointer;font-family:inherit;color:inherit}
 .header-bg{background:linear-gradient(135deg,rgba(120,80,30,.15) 0%,transparent 50%,rgba(80,60,30,.1) 100%)}
 .header-inner{max-width:512px;margin:0 auto;padding:48px 20px 32px}
+.brand{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.brand-logo{width:88px;height:auto;display:block;flex-shrink:0;border-radius:14px}
 .wrap{max-width:512px;margin:0 auto;padding:0 20px 64px}
 .plan{display:flex;align-items:flex-start;gap:0;border-radius:16px;border:1px solid rgba(68,64,60,.4);background:rgba(28,25,23,.6);transition:all .2s;margin-top:12px;overflow:hidden}
 .plan:hover{border-color:rgba(180,83,9,.4);background:rgba(41,37,36,.6)}
@@ -43,12 +47,9 @@ button{background:none;border:none;cursor:pointer;font-family:inherit;color:inhe
 <body>
 <header class="header-bg">
 <div class="header-inner">
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-    <div style="width:48px;height:48px;border-radius:14px;background:rgba(120,53,15,.3);border:1px solid rgba(180,83,9,.4);display:flex;align-items:center;justify-content:center"><span style="font-size:24px">⚔️</span></div>
-    <div>
-      <h1 style="font-size:28px;font-weight:700;color:#fffbeb;line-height:1.25;letter-spacing:-.025em">Iron Sharpens Iron</h1>
-      <p class="mono" style="font-size:12px;color:#a8a29e;font-weight:500;letter-spacing:.025em">30-DAY READING PLANS</p>
-    </div>
+  <div class="brand">
+    <img class="brand-logo" src="/shared/logo.png" alt="Iron Sharpens Iron" width="88" height="82">
+    <p class="mono" style="font-size:12px;color:#a8a29e;font-weight:500;letter-spacing:.025em">30-DAY READING PLANS</p>
   </div>
   <p style="font-size:15px;color:#a8a29e;line-height:1.6;margin-top:8px;font-style:italic">"As iron sharpens iron, so one person sharpens another." — Proverbs 27:17</p>
 </div>
