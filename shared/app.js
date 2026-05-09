@@ -1,10 +1,17 @@
-// Iron Sharpens Iron v2.1.0 — Shared Engine (Steel Theme Ready)
+// Iron Sharpens Iron v2.2.0 — Shared Engine (i18n: en/es/fr)
 // Expects window.PLAN = { title, subtitle, storageKey, totalDays, days, verses, checks }
-// Supports ?start=YYYY-MM-DD query param for custom start dates
+// Optional localized fields per item (topic_es, topic_fr, summary_es, summary_fr,
+// title_es, title_fr, subtitle_es, subtitle_fr, l_es, l_fr, t_es, t_fr, r_es, r_fr).
+// Supports ?start=YYYY-MM-DD and ?lang=en|es|fr.
 
 (function() {
   var P = window.PLAN;
-  if (!P) { document.getElementById("app").innerHTML = '<p style="color:#f87171;padding:20px">Error: No plan config found.</p>'; return; }
+  var UI = (window.UI || {});
+  if (!P) {
+    document.getElementById("app").innerHTML = '<p style="color:#f87171;padding:20px">' +
+      (UI.noConfig || "Error: No plan config found.") + '</p>';
+    return;
+  }
 
   var DAYS = P.days;
   var WV = P.verses;
@@ -13,6 +20,10 @@
   var TOTAL = P.totalDays || 30;
   var PHASE_DAYS = [];
   for (var i = 0; i < DAYS.length; i++) { if (DAYS[i].ph) PHASE_DAYS.push(DAYS[i].day); }
+
+  function tr(obj, key) {
+    return (window.tr ? window.tr(obj, key) : (obj && obj[key]) || "");
+  }
 
   // Start date: ?start=YYYY-MM-DD or defaults to 1st of current month
   function getStart() {
@@ -40,10 +51,15 @@
   // Storage keyed to the specific start date
   var startStr = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
   var SK = P.storageKey + "-" + startStr;
-  var VERS = ["ESV", "NASB", "NKJV", "NIV", "LSB"];
-  var VK = "isi-version";
+  var LANG = window.LANG || "en";
+  var VERS_BY_LANG = window.VERS || { en: ["ESV", "NASB", "NKJV", "NIV", "LSB"] };
+  var VERS = VERS_BY_LANG[LANG] || VERS_BY_LANG.en;
+  var VK = "isi-version-" + LANG;
 
-  function gver() { try { var v = localStorage.getItem(VK); return VERS.indexOf(v) >= 0 ? v : "ESV"; } catch(e) { return "ESV"; } }
+  function gver() {
+    try { var v = localStorage.getItem(VK); return VERS.indexOf(v) >= 0 ? v : VERS[0]; }
+    catch(e) { return VERS[0]; }
+  }
   function sver(v) { try { localStorage.setItem(VK, v); } catch(e) {} }
   function lc() { try { return JSON.parse(localStorage.getItem(SK)) || {}; } catch(e) { return {}; } }
   function sc(d) { try { localStorage.setItem(SK, JSON.stringify(d)); } catch(e) {} }
@@ -80,23 +96,25 @@
   function rd(d) {
     var dk = "day-" + d.day, ch = cl[dk] || {}, ad = allDone(ch), it = d.day === cd, io = ed === d.day;
     var cls = it ? "card-today" : ad ? "card-done" : "card";
+    var topic = tr(d, "topic");
+    var summary = tr(d, "summary");
     var h = '<div class="' + cls + '" style="margin-top:12px"><button class="card-btn" onclick="td2(' + d.day + ')">';
-    h += '<div class="day-circle ' + (it ? "dc-today" : ad ? "dc-done" : "dc-def") + '">' + (ad ? "\u2713" : d.day) + '</div>';
+    h += '<div class="day-circle ' + (it ? "dc-today" : ad ? "dc-done" : "dc-def") + '">' + (ad ? "✓" : d.day) + '</div>';
     h += '<div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
     h += '<span style="font-weight:600;font-size:16px;color:' + (it ? "var(--accent-text)" : "#e7e5e4") + '">' + d.reading + '</span>';
-    if (it) h += '<span class="badge b-today">TODAY</span>';
-    if (ad && !it) h += '<span class="badge b-done">DONE</span>';
-    h += '</div><p style="font-size:14px;color:#a8a29e;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + d.topic + '</p></div>';
+    if (it) h += '<span class="badge b-today">' + (UI.today || "TODAY") + '</span>';
+    if (ad && !it) h += '<span class="badge b-done">' + (UI.done || "DONE") + '</span>';
+    h += '</div><p style="font-size:14px;color:#a8a29e;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + topic + '</p></div>';
     h += '<svg class="chevron' + (io ? " chevron-open" : "") + '" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>';
     h += '</button>';
 
     if (io) {
       h += '<div class="expand anim"><div style="border-top:1px solid rgba(68,64,60,.5);padding-top:16px"></div>';
-      h += '<p style="font-size:14px;line-height:1.625;color:#d6d3d1">' + d.summary + '</p>';
-      h += '<a href="https://www.biblegateway.com/passage/?search=' + encodeURIComponent(d.reading) + '&version=' + bv + '" target="_blank" rel="noopener noreferrer" class="read-btn">\uD83D\uDCDC Read ' + d.reading + ' (' + bv + ')</a>';
+      h += '<p style="font-size:14px;line-height:1.625;color:#d6d3d1">' + summary + '</p>';
+      h += '<a href="https://www.biblegateway.com/passage/?search=' + encodeURIComponent(d.reading) + '&version=' + bv + '" target="_blank" rel="noopener noreferrer" class="read-btn">' + (UI.readBtn ? UI.readBtn(d.reading, bv) : ("📜 Read " + d.reading + " (" + bv + ")")) + '</a>';
       h += '<div class="cl-box">';
-      h += '<p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Daily Checklist</p>';
-      for (var ci = 0; ci < CHECKS.length; ci++) h += rc(dk, CHECKS[ci].k, CHECKS[ci].l, ch);
+      h += '<p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">' + (UI.dailyChecklist || "Daily Checklist") + '</p>';
+      for (var ci = 0; ci < CHECKS.length; ci++) h += rc(dk, CHECKS[ci].k, tr(CHECKS[ci], "l"), ch);
       h += '</div></div>';
     }
     h += '</div>';
@@ -111,22 +129,22 @@
 
     // Upcoming banner
     if (upcoming) {
-      var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      var months = (UI.months || ["January","February","March","April","May","June","July","August","September","October","November","December"]);
       var startLabel = months[startDate.getMonth()] + " " + startDate.getDate();
       h += '<div style="border-radius:16px;background:var(--badge-bg);border:1px solid var(--accent-60);padding:20px;text-align:center">';
-      h += '<p style="font-size:18px;font-weight:600;color:var(--badge-text)">Challenge begins ' + startLabel + '</p>';
-      h += '<p style="font-size:14px;color:#a8a29e;margin-top:4px">The reading schedule is below. Get ready, men.</p></div>';
+      h += '<p style="font-size:18px;font-weight:600;color:var(--badge-text)">' + (UI.challengeBegins ? UI.challengeBegins(startLabel) : ("Challenge begins " + startLabel)) + '</p>';
+      h += '<p style="font-size:14px;color:#a8a29e;margin-top:4px">' + (UI.getReady || "The reading schedule is below. Get ready, men.") + '</p></div>';
     }
 
     // Today card
     if (td) {
       h += '<div class="glow" style="border-radius:16px;border:1px solid var(--accent-60);background:linear-gradient(to bottom right,var(--card-top),rgba(28,25,23,.9),rgba(28,25,23,1));padding:20px">';
       h += '<div style="display:flex;align-items:center;justify-content:space-between"><div>';
-      h += '<p class="mono" style="font-size:12px;font-weight:600;color:var(--verse-accent);text-transform:uppercase;letter-spacing:.05em">Day ' + cd + ' of ' + TOTAL + ' \u2014 Today</p>';
+      h += '<p class="mono" style="font-size:12px;font-weight:600;color:var(--verse-accent);text-transform:uppercase;letter-spacing:.05em">' + (UI.dayOf ? UI.dayOf(cd, TOTAL) : ("Day " + cd + " of " + TOTAL + " — Today")) + '</p>';
       h += '<h2 style="font-size:20px;font-weight:700;color:#fffbeb;margin-top:4px">' + td.reading + '</h2>';
-      h += '<p style="font-size:14px;color:#a8a29e;margin-top:2px">' + td.topic + '</p></div>';
+      h += '<p style="font-size:14px;color:#a8a29e;margin-top:2px">' + tr(td, "topic") + '</p></div>';
       h += '<div style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--icon-bg);border:2px solid var(--accent-60)"><span style="font-size:24px;font-weight:700;color:var(--badge-text)">' + cd + '</span></div></div>';
-      h += '<a href="https://www.biblegateway.com/passage/?search=' + encodeURIComponent(td.reading) + '&version=' + bv + '" target="_blank" rel="noopener noreferrer" class="read-btn" style="margin-top:16px">\uD83D\uDCD6 Open Today\u2019s Reading</a>';
+      h += '<a href="https://www.biblegateway.com/passage/?search=' + encodeURIComponent(td.reading) + '&version=' + bv + '" target="_blank" rel="noopener noreferrer" class="read-btn" style="margin-top:16px">' + (UI.openToday || "📖 Open Today’s Reading") + '</a>';
       h += '<div class="ver-toggle">';
       for (var vi = 0; vi < VERS.length; vi++) h += '<button class="ver-btn' + (VERS[vi] === bv ? ' active' : '') + '" onclick="sv(\'' + VERS[vi] + '\')">' + VERS[vi] + '</button>';
       h += '</div></div>';
@@ -135,29 +153,32 @@
     // Memory verse
     if (v) {
       h += '<div style="border-radius:16px;background:rgba(28,25,23,.8);border:1px solid rgba(68,64,60,.4);padding:20px">';
-      h += '<p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">This Phase\u2019s Memory Verse</p>';
-      h += '<p style="font-size:16px;font-style:italic;line-height:1.625;color:#e7e5e4">\u201C' + v.t + '\u201D</p>';
-      h += '<p style="font-size:14px;font-weight:600;color:var(--verse-accent);margin-top:8px">\u2014 ' + v.r + '</p></div>';
+      h += '<p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">' + (UI.memoryVerseLabel || "This Phase’s Memory Verse") + '</p>';
+      h += '<p style="font-size:16px;font-style:italic;line-height:1.625;color:#e7e5e4">“' + tr(v, "t") + '”</p>';
+      h += '<p style="font-size:14px;font-weight:600;color:var(--verse-accent);margin-top:8px">— ' + tr(v, "r") + '</p></div>';
     }
 
     // Progress
     var dayPr = upcoming ? 0 : Math.round(cd / TOTAL * 100);
     h += '<div style="border-radius:16px;background:rgba(28,25,23,.6);border:1px solid rgba(68,64,60,.3);padding:20px">';
-    h += '<div style="display:flex;justify-content:space-between;align-items:center"><p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em">Challenge Progress</p><span style="font-size:14px;font-weight:500;color:#a8a29e">' + (upcoming ? "Not started" : "Day " + cd + " of " + TOTAL) + '</span></div>';
+    h += '<div style="display:flex;justify-content:space-between;align-items:center"><p class="mono" style="font-size:12px;font-weight:600;color:#78716c;text-transform:uppercase;letter-spacing:.05em">' + (UI.challengeProgress || "Challenge Progress") + '</p><span style="font-size:14px;font-weight:500;color:#a8a29e">' + (upcoming ? (UI.notStarted || "Not started") : (UI.dayShort ? UI.dayShort(cd, TOTAL) : ("Day " + cd + " of " + TOTAL))) + '</span></div>';
     h += '<div class="pb-bg" style="margin-top:12px"><div class="pb-fill" style="width:' + dayPr + '%"></div></div>';
-    h += '<p style="font-size:12px;color:#78716c;margin-top:12px">' + (upcoming ? TOTAL + " days total" : (TOTAL - cd) + " days remaining") + '</p></div>';
+    h += '<p style="font-size:12px;color:#78716c;margin-top:12px">' + (upcoming ? (UI.daysTotal ? UI.daysTotal(TOTAL) : (TOTAL + " days total")) : (UI.daysRemaining ? UI.daysRemaining(TOTAL - cd) : ((TOTAL - cd) + " days remaining"))) + '</p></div>';
 
     // Schedule
     h += '<div>';
-    h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><h2 style="font-size:18px;font-weight:700;color:#e7e5e4">Reading Schedule</h2>';
-    h += '<button onclick="tsa()" style="font-size:12px;font-weight:500;color:var(--verse-accent);padding:4px 0">' + (sa ? "Show less" : "Show all " + TOTAL + " days") + '</button></div>';
+    h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><h2 style="font-size:18px;font-weight:700;color:#e7e5e4">' + (UI.readingSchedule || "Reading Schedule") + '</h2>';
+    h += '<button onclick="tsa()" style="font-size:12px;font-weight:500;color:var(--verse-accent);padding:4px 0">' + (sa ? (UI.showLess || "Show less") : (UI.showAll ? UI.showAll(TOTAL) : ("Show all " + TOTAL + " days"))) + '</button></div>';
 
     var vis = sa ? DAYS : DAYS.slice(0, Math.min(upcoming ? 3 : cd + 2, TOTAL));
     for (var i = 0; i < vis.length; i++) {
       var d = vis[i];
       if (d.ph && d.day > 1) {
         var wv = WV[d.day] || {};
-        h += '<div class="wd"><div class="wl"></div><span class="mono" style="font-size:12px;color:#78716c;font-weight:600;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap">Phase ' + d.ph + (wv.r ? ' \u2022 Memorize: ' + wv.r : '') + '</span><div class="wl"></div></div>';
+        var phLabel = (UI.phase || "Phase") + " " + d.ph;
+        var refLocal = tr(wv, "r");
+        if (refLocal) phLabel += ' • ' + (UI.memorize || "Memorize") + ': ' + refLocal;
+        h += '<div class="wd"><div class="wl"></div><span class="mono" style="font-size:12px;color:#78716c;font-weight:600;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap">' + phLabel + '</span><div class="wl"></div></div>';
       }
       h += rd(d);
     }
@@ -165,11 +186,29 @@
 
     // Footer
     h += '<footer style="padding-top:32px;padding-bottom:8px;display:flex;align-items:center;justify-content:center;gap:12px;color:#57534e">';
-    h += '<span style="font-size:12px;font-style:italic">\u201CAs iron sharpens iron, so one person sharpens another.\u201D</span>';
-    h += '<span style="color:#44403c">\u2022</span><span style="font-size:12px">Proverbs 27:17</span></footer>';
+    h += '<span style="font-size:12px;font-style:italic">' + (UI.footerQuote || "“As iron sharpens iron, so one person sharpens another.”") + '</span>';
+    h += '<span style="color:#44403c">•</span><span style="font-size:12px">' + (UI.footerRef || "Proverbs 27:17") + '</span></footer>';
 
     a.innerHTML = h;
     if (first && !upcoming) { first = false; ed = cd; render(); }
+  }
+
+  // Apply localized subtitle to any header subtitle <p class="mono"> if present and the plan provides translations
+  function applySubtitle() {
+    var sub = window.tr ? window.tr(P, "subtitle") : P.subtitle;
+    if (!sub) return;
+    var els = document.querySelectorAll(".brand .mono");
+    if (els && els.length) els[els.length - 1].textContent = sub;
+    var t = window.tr ? window.tr(P, "title") : P.title;
+    if (t) {
+      try { document.title = "Iron Sharpens Iron — " + t; } catch (e) {}
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", applySubtitle);
+  } else {
+    applySubtitle();
   }
 
   render();
