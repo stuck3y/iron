@@ -144,7 +144,7 @@ window.PLAN = {
   {k:"read",l:"Read the passage",l_es:"Lee el pasaje",l_fr:"Lis le passage"},
   {k:"pray",l:"Pray & journal",l_es:"Ora y escribe en tu diario",l_fr:"Prie et tiens un journal"},
   {k:"workout",l:"Workout (3–5x/week)",l_es:"Entrena (3–5x por semana)",l_fr:"Entraîne-toi (3–5x par semaine)"},
-  {k:"abstain",l:"Abstain from your one thing",l_es:"Abstente de aquello que decidiste",l_fr:"Abstiens-toi de ta seule chose"},
+  {k:"abstain",l:"Abstain from your one thing",l_es:"Abstente de aquello que decidiste",l_fr:"Abstiens-toi de la chose que tu as choisie"},
   {k:"marco",l:"Marco Polo update",l_es:"Mensaje en Marco Polo",l_fr:"Mise à jour Marco Polo"}
 ]
 };
