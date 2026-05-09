@@ -42,6 +42,10 @@ button{background:none;border:none;cursor:pointer;font-family:inherit;color:inhe
 .date-picker input:focus{border-color:rgba(180,83,9,.6)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#292524;color:#4ade80;font-size:14px;font-weight:600;padding:10px 20px;border-radius:12px;border:1px solid rgba(74,222,128,.3);opacity:0;transition:all .3s;pointer-events:none;z-index:100}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.lang-toggle{display:inline-flex;gap:4px;margin-top:10px;padding:3px;border-radius:9999px;background:rgba(28,25,23,.6);border:1px solid rgba(68,64,60,.4);width:fit-content}
+.lang-btn{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.04em;padding:4px 10px;border-radius:9999px;color:#a8a29e;transition:all .15s}
+.lang-btn:hover{color:#e7e5e4}
+.lang-btn.active{background:rgba(120,53,15,.3);color:#fcd34d;border:1px solid rgba(180,83,9,.4)}
 </style>
 </head>
 <body>
@@ -49,93 +53,93 @@ button{background:none;border:none;cursor:pointer;font-family:inherit;color:inhe
 <div class="header-inner">
   <div class="brand">
     <img class="brand-logo" src="/shared/logo.png" alt="Iron Sharpens Iron" width="88" height="82">
-    <p class="mono" style="font-size:12px;color:#a8a29e;font-weight:500;letter-spacing:.025em">30-DAY READING PLANS</p>
+    <p class="mono" data-tr="brandSub" style="font-size:12px;color:#a8a29e;font-weight:500;letter-spacing:.025em">30-DAY READING PLANS</p>
   </div>
-  <p style="font-size:15px;color:#a8a29e;line-height:1.6;margin-top:8px;font-style:italic">"As iron sharpens iron, so one person sharpens another." — Proverbs 27:17</p>
+  <p data-tr="quote" style="font-size:15px;color:#a8a29e;line-height:1.6;margin-top:8px;font-style:italic">"As iron sharpens iron, so one person sharpens another." — Proverbs 27:17</p>
 </div>
 </header>
 
 <div class="wrap">
-  <p style="font-size:14px;color:#78716c;margin-bottom:4px" class="mono">CHOOSE YOUR PLAN</p>
+  <p data-tr="chooseYourPlan" style="font-size:14px;color:#78716c;margin-bottom:4px" class="mono">CHOOSE YOUR PLAN</p>
 
   <div class="date-picker">
-    <label for="startDate">Start date</label>
+    <label data-tr="startDate" for="startDate">Start date</label>
     <input type="date" id="startDate">
   </div>
 
   <div class="plan">
     <a href="/acts/" class="plan-link" data-path="acts">
-      <div class="plan-title">Acts</div>
-      <div class="plan-sub">The birth of the church. 28 chapters + full re-read.</div>
-      <span class="plan-tag tag-book">28 CHAPTERS</span>
+      <div class="plan-title" data-key="acts.title">Acts</div>
+      <div class="plan-sub" data-key="acts.sub">The birth of the church. 28 chapters + full re-read.</div>
+      <span class="plan-tag tag-book" data-key="acts.tag">28 CHAPTERS</span>
     </a>
-    <button class="share-btn" onclick="share('acts','Acts')" aria-label="Share Acts plan">
+    <button class="share-btn" data-share="acts" aria-label="Share Acts plan">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
     </button>
   </div>
 
   <div class="plan">
     <a href="/proverbs/" class="plan-link" data-path="proverbs">
-      <div class="plan-title">Proverbs</div>
-      <div class="plan-sub">The wisdom of Solomon. One chapter a day.</div>
-      <span class="plan-tag tag-book">31 CHAPTERS</span>
+      <div class="plan-title" data-key="proverbs.title">Proverbs</div>
+      <div class="plan-sub" data-key="proverbs.sub">The wisdom of Solomon. One chapter a day.</div>
+      <span class="plan-tag tag-book" data-key="proverbs.tag">31 CHAPTERS</span>
     </a>
-    <button class="share-btn" onclick="share('proverbs','Proverbs')" aria-label="Share Proverbs plan">
+    <button class="share-btn" data-share="proverbs" aria-label="Share Proverbs plan">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
     </button>
   </div>
 
   <div class="plan">
     <a href="/john/" class="plan-link" data-path="john">
-      <div class="plan-title">Gospel of John</div>
-      <div class="plan-sub">Read, re-read, and live in the Gospel. Phase re-reads built in.</div>
-      <span class="plan-tag tag-book">21 CHAPTERS</span>
+      <div class="plan-title" data-key="john.title">Gospel of John</div>
+      <div class="plan-sub" data-key="john.sub">Read, re-read, and live in the Gospel. Phase re-reads built in.</div>
+      <span class="plan-tag tag-book" data-key="john.tag">21 CHAPTERS</span>
     </a>
-    <button class="share-btn" onclick="share('john','Gospel of John')" aria-label="Share John plan">
+    <button class="share-btn" data-share="john" aria-label="Share John plan">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
     </button>
   </div>
 
   <div class="plan">
     <a href="/luke/" class="plan-link" data-path="luke">
-      <div class="plan-title">Gospel of Luke</div>
-      <div class="plan-sub">The Gospel for the outcast. 24 chapters with phase re-reads.</div>
-      <span class="plan-tag tag-book">24 CHAPTERS</span>
+      <div class="plan-title" data-key="luke.title">Gospel of Luke</div>
+      <div class="plan-sub" data-key="luke.sub">The Gospel for the outcast. 24 chapters with phase re-reads.</div>
+      <span class="plan-tag tag-book" data-key="luke.tag">24 CHAPTERS</span>
     </a>
-    <button class="share-btn" onclick="share('luke','Gospel of Luke')" aria-label="Share Luke plan">
+    <button class="share-btn" data-share="luke" aria-label="Share Luke plan">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
     </button>
   </div>
 
   <div class="plan">
     <a href="/matthew/" class="plan-link" data-path="matthew">
-      <div class="plan-title">Gospel of Matthew</div>
-      <div class="plan-sub">The Gospel of the King. One chapter a day + full re-read.</div>
-      <span class="plan-tag tag-book">28 CHAPTERS</span>
+      <div class="plan-title" data-key="matthew.title">Gospel of Matthew</div>
+      <div class="plan-sub" data-key="matthew.sub">The Gospel of the King. One chapter a day + full re-read.</div>
+      <span class="plan-tag tag-book" data-key="matthew.tag">28 CHAPTERS</span>
     </a>
-    <button class="share-btn" onclick="share('matthew','Gospel of Matthew')" aria-label="Share Matthew plan">
+    <button class="share-btn" data-share="matthew" aria-label="Share Matthew plan">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
     </button>
   </div>
 
   <div class="plan">
     <a href="/psalms/" class="plan-link" data-path="psalms">
-      <div class="plan-title">Psalms</div>
-      <div class="plan-sub">30 curated Psalms. Prayers, praise, and raw honesty before God.</div>
-      <span class="plan-tag tag-book">30 SELECTED</span>
+      <div class="plan-title" data-key="psalms.title">Psalms</div>
+      <div class="plan-sub" data-key="psalms.sub">30 curated Psalms. Prayers, praise, and raw honesty before God.</div>
+      <span class="plan-tag tag-book" data-key="psalms.tag">30 SELECTED</span>
     </a>
-    <button class="share-btn" onclick="share('psalms','Psalms')" aria-label="Share Psalms plan">
+    <button class="share-btn" data-share="psalms" aria-label="Share Psalms plan">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
     </button>
   </div>
 
   <div class="plan">
     <a href="/select/" class="plan-link" data-path="select">
-      <div class="plan-title">Selected Scriptures</div>
-      <div class="plan-sub">Key passages across the Bible. Genesis to Revelation in 30 days.</div>
-      <span class="plan-tag tag-book">30 PASSAGES</span>
+      <div class="plan-title" data-key="select.title">Selected Scriptures</div>
+      <div class="plan-sub" data-key="select.sub">Key passages across the Bible. Genesis to Revelation in 30 days.</div>
+      <span class="plan-tag tag-book" data-key="select.tag">30 PASSAGES</span>
     </a>
-    <button class="share-btn" onclick="share('select','Selected Scriptures')" aria-label="Share Selected Scriptures plan">
+    <button class="share-btn" data-share="select" aria-label="Share Selected Scriptures plan">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
     </button>
   </div>
@@ -147,55 +151,140 @@ button{background:none;border:none;cursor:pointer;font-family:inherit;color:inhe
 
 <div class="toast" id="toast"></div>
 
+<script src="/shared/lang.js"></script>
 <script>
-function getStartDate() {
-  return document.getElementById('startDate').value;
-}
+(function() {
+  var LANG = window.LANG || "en";
 
-function buildUrl(path) {
-  var sd = getStartDate();
-  return window.location.origin + '/' + path + '/' + (sd ? '?start=' + sd : '');
-}
+  var T = {
+    en: {
+      brandSub: "30-DAY READING PLANS",
+      quote: "“As iron sharpens iron, so one person sharpens another.” — Proverbs 27:17",
+      chooseYourPlan: "CHOOSE YOUR PLAN",
+      startDate: "Start date",
+      linkCopied: "Link copied!",
+      sharePrefix: "Iron Sharpens Iron: ",
+      shareSuffix: " — 30-Day Challenge",
+      plans: {
+        acts: { title: "Acts", sub: "The birth of the church. 28 chapters + full re-read.", tag: "28 CHAPTERS", name: "Acts" },
+        proverbs: { title: "Proverbs", sub: "The wisdom of Solomon. One chapter a day.", tag: "31 CHAPTERS", name: "Proverbs" },
+        john: { title: "Gospel of John", sub: "Read, re-read, and live in the Gospel. Phase re-reads built in.", tag: "21 CHAPTERS", name: "Gospel of John" },
+        luke: { title: "Gospel of Luke", sub: "The Gospel for the outcast. 24 chapters with phase re-reads.", tag: "24 CHAPTERS", name: "Gospel of Luke" },
+        matthew: { title: "Gospel of Matthew", sub: "The Gospel of the King. One chapter a day + full re-read.", tag: "28 CHAPTERS", name: "Gospel of Matthew" },
+        psalms: { title: "Psalms", sub: "30 curated Psalms. Prayers, praise, and raw honesty before God.", tag: "30 SELECTED", name: "Psalms" },
+        select: { title: "Selected Scriptures", sub: "Key passages across the Bible. Genesis to Revelation in 30 days.", tag: "30 PASSAGES", name: "Selected Scriptures" }
+      }
+    },
+    es: {
+      brandSub: "PLANES DE LECTURA DE 30 DÍAS",
+      quote: "“Hierro con hierro se aguza; y así el hombre aguza el rostro de su amigo.” — Proverbios 27:17",
+      chooseYourPlan: "ELIGE TU PLAN",
+      startDate: "Fecha de inicio",
+      linkCopied: "¡Enlace copiado!",
+      sharePrefix: "Iron Sharpens Iron: ",
+      shareSuffix: " — Reto de 30 días",
+      plans: {
+        acts: { title: "Hechos", sub: "El nacimiento de la iglesia. 28 capítulos + relectura completa.", tag: "28 CAPÍTULOS", name: "Hechos" },
+        proverbs: { title: "Proverbios", sub: "La sabiduría de Salomón. Un capítulo al día.", tag: "31 CAPÍTULOS", name: "Proverbios" },
+        john: { title: "Evangelio de Juan", sub: "Lee, relee y vive el Evangelio. Relecturas por fases incluidas.", tag: "21 CAPÍTULOS", name: "Evangelio de Juan" },
+        luke: { title: "Evangelio de Lucas", sub: "El Evangelio para el marginado. 24 capítulos con relecturas por fases.", tag: "24 CAPÍTULOS", name: "Evangelio de Lucas" },
+        matthew: { title: "Evangelio de Mateo", sub: "El Evangelio del Rey. Un capítulo al día + relectura completa.", tag: "28 CAPÍTULOS", name: "Evangelio de Mateo" },
+        psalms: { title: "Salmos", sub: "30 Salmos seleccionados. Oraciones, alabanza y franqueza ante Dios.", tag: "30 SELECCIONADOS", name: "Salmos" },
+        select: { title: "Pasajes Seleccionados", sub: "Pasajes clave de toda la Biblia. De Génesis a Apocalipsis en 30 días.", tag: "30 PASAJES", name: "Pasajes Seleccionados" }
+      }
+    },
+    fr: {
+      brandSub: "PLANS DE LECTURE DE 30 JOURS",
+      quote: "« Le fer aiguise le fer, ainsi un homme aiguise un autre homme. » — Proverbes 27:17",
+      chooseYourPlan: "CHOISIS TON PLAN",
+      startDate: "Date de début",
+      linkCopied: "Lien copié !",
+      sharePrefix: "Iron Sharpens Iron : ",
+      shareSuffix: " — Défi de 30 jours",
+      plans: {
+        acts: { title: "Actes", sub: "La naissance de l’Église. 28 chapitres + relecture intégrale.", tag: "28 CHAPITRES", name: "Actes" },
+        proverbs: { title: "Proverbes", sub: "La sagesse de Salomon. Un chapitre par jour.", tag: "31 CHAPITRES", name: "Proverbes" },
+        john: { title: "Évangile de Jean", sub: "Lis, relis et vis l’Évangile. Relectures par phases incluses.", tag: "21 CHAPITRES", name: "Évangile de Jean" },
+        luke: { title: "Évangile de Luc", sub: "L’Évangile pour les exclus. 24 chapitres avec relectures par phases.", tag: "24 CHAPITRES", name: "Évangile de Luc" },
+        matthew: { title: "Évangile de Matthieu", sub: "L’Évangile du Roi. Un chapitre par jour + relecture intégrale.", tag: "28 CHAPITRES", name: "Évangile de Matthieu" },
+        psalms: { title: "Psaumes", sub: "30 Psaumes choisis. Prières, louange et franchise devant Dieu.", tag: "30 CHOISIS", name: "Psaumes" },
+        select: { title: "Passages choisis", sub: "Passages clés de toute la Bible. De la Genèse à l’Apocalypse en 30 jours.", tag: "30 PASSAGES", name: "Passages choisis" }
+      }
+    }
+  };
 
-// Update plan links when date changes
-function updateLinks() {
-  var links = document.querySelectorAll('.plan-link');
-  links.forEach(function(link) {
-    var path = link.getAttribute('data-path');
-    if (path) link.href = '/' + path + '/' + (getStartDate() ? '?start=' + getStartDate() : '');
+  var t = T[LANG] || T.en;
+
+  // Apply chrome translations
+  document.querySelectorAll("[data-tr]").forEach(function(el) {
+    var k = el.getAttribute("data-tr");
+    if (t[k] != null) el.textContent = t[k];
   });
-}
 
-function share(path, name) {
-  var url = buildUrl(path);
-  var text = 'Iron Sharpens Iron: ' + name + ' \u2014 30-Day Challenge';
+  // Apply per-plan translations
+  document.querySelectorAll("[data-key]").forEach(function(el) {
+    var key = el.getAttribute("data-key").split(".");
+    var p = t.plans[key[0]];
+    if (p && p[key[1]] != null) el.textContent = p[key[1]];
+  });
 
-  if (navigator.share) {
-    navigator.share({ title: text, url: url }).catch(function(){});
-  } else {
-    navigator.clipboard.writeText(url).then(function() {
-      showToast('Link copied!');
-    }).catch(function() {
-      showToast('Link copied!');
+  // Update title and html lang
+  try {
+    document.documentElement.setAttribute("lang", LANG);
+    var docTitle = LANG === "es" ? "Iron Sharpens Iron — Planes de lectura"
+                : LANG === "fr" ? "Iron Sharpens Iron — Plans de lecture"
+                : "Iron Sharpens Iron — Reading Plans";
+    document.title = docTitle;
+  } catch(e) {}
+
+  function getStartDate() { return document.getElementById('startDate').value; }
+
+  function buildUrl(path) {
+    var sd = getStartDate();
+    var qs = [];
+    if (sd) qs.push("start=" + sd);
+    if (LANG !== "en") qs.push("lang=" + LANG);
+    return window.location.origin + '/' + path + '/' + (qs.length ? '?' + qs.join("&") : '');
+  }
+
+  function updateLinks() {
+    document.querySelectorAll('.plan-link').forEach(function(link) {
+      var path = link.getAttribute('data-path');
+      if (path) link.href = buildUrl(path);
     });
   }
-}
 
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); }, 2000);
-}
+  function share(path) {
+    var url = buildUrl(path);
+    var name = (t.plans[path] && t.plans[path].name) || path;
+    var text = t.sharePrefix + name + t.shareSuffix;
+    if (navigator.share) {
+      navigator.share({ title: text, url: url }).catch(function(){});
+    } else {
+      navigator.clipboard.writeText(url).then(function() { showToast(t.linkCopied); }).catch(function() { showToast(t.linkCopied); });
+    }
+  }
 
-// Default to today
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0');
-var yyyy = today.getFullYear();
-document.getElementById('startDate').value = yyyy + '-' + mm + '-' + dd;
-document.getElementById('startDate').addEventListener('change', updateLinks);
-updateLinks();
+  document.querySelectorAll("[data-share]").forEach(function(btn) {
+    btn.addEventListener("click", function() { share(btn.getAttribute("data-share")); });
+  });
+
+  function showToast(msg) {
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(function() { el.classList.remove('show'); }, 2000);
+  }
+
+  // Default to today
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+  document.getElementById('startDate').value = yyyy + '-' + mm + '-' + dd;
+  document.getElementById('startDate').addEventListener('change', updateLinks);
+  updateLinks();
+})();
 </script>
 </body>
 </html>
