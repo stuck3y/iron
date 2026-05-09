@@ -57,8 +57,11 @@
   var VK = "isi-version-" + LANG;
 
   function gver() {
-    try { var v = localStorage.getItem(VK); return VERS.indexOf(v) >= 0 ? v : VERS[0]; }
-    catch(e) { return VERS[0]; }
+    try {
+      var v = localStorage.getItem(VK);
+      if (LANG === "en" && (v == null || v === "")) v = localStorage.getItem("isi-version");
+      return VERS.indexOf(v) >= 0 ? v : VERS[0];
+    } catch(e) { return VERS[0]; }
   }
   function sver(v) { try { localStorage.setItem(VK, v); } catch(e) {} }
   function lc() { try { return JSON.parse(localStorage.getItem(SK)) || {}; } catch(e) { return {}; } }
