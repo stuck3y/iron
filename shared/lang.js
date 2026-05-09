@@ -152,7 +152,10 @@
         '" title="' + FLAG_LABEL[c] + '">' + FLAG[c] + '</button>';
     }
     wrap.innerHTML = html;
-    host.appendChild(wrap);
+    var row = document.createElement("div");
+    row.style.cssText = "display:flex;justify-content:flex-end";
+    row.appendChild(wrap);
+    host.appendChild(row);
   }
 
   if (document.readyState === "loading") {
