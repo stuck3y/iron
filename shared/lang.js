@@ -152,10 +152,19 @@
         '" title="' + FLAG_LABEL[c] + '">' + FLAG[c] + '</button>';
     }
     wrap.innerHTML = html;
-    var row = document.createElement("div");
-    row.style.cssText = "display:flex;justify-content:flex-end";
-    row.appendChild(wrap);
-    host.appendChild(row);
+    var link = host.querySelector('a[href*="sharpiron.org"]');
+    if (link && link.parentNode === host) {
+      var row = document.createElement("div");
+      row.className = "header-meta";
+      host.insertBefore(row, link);
+      row.appendChild(link);
+      row.appendChild(wrap);
+    } else {
+      var fallback = document.createElement("div");
+      fallback.style.cssText = "display:flex;justify-content:flex-end";
+      fallback.appendChild(wrap);
+      host.appendChild(fallback);
+    }
   }
 
   if (document.readyState === "loading") {

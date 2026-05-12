@@ -53,7 +53,8 @@ button{background:none;border:none;cursor:pointer;font-family:inherit;color:inhe
 .anim{animation:fadeIn .25s ease-out}
 @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px var(--glow-a)}50%{box-shadow:0 0 35px var(--glow-b)}}
 .glow{animation:pulseGlow 4s ease-in-out infinite}
-.lang-toggle{display:inline-flex;gap:4px;margin-top:10px;padding:3px;border-radius:9999px;background:rgba(28,25,23,.6);border:1px solid rgba(68,64,60,.4);width:fit-content}
+.header-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.lang-toggle{display:inline-flex;gap:4px;padding:3px;border-radius:9999px;background:rgba(28,25,23,.6);border:1px solid rgba(68,64,60,.4);width:fit-content}
 .lang-btn{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.04em;padding:4px 10px;border-radius:9999px;color:#a8a29e;transition:all .15s}
 .lang-btn:hover{color:#e7e5e4}
 .lang-btn.active{background:var(--badge-bg,rgba(71,85,105,.35));color:var(--badge-text,#cbd5e1);border:1px solid var(--accent-60,rgba(100,116,139,.5))}
