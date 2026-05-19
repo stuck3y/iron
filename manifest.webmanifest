@@ -1,0 +1,19 @@
+{
+  "name": "Iron Sharpens Iron",
+  "short_name": "Iron",
+  "description": "Iron Sharpens Iron — Bible reading & fitness challenges for men.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0c0a09",
+  "theme_color": "#0c0a09",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/shared/logo.png",
+      "sizes": "638x594",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
