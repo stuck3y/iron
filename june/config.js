@@ -47,6 +47,7 @@ window.PLAN = {
   {k:"read",l:"Read the passage"},
   {k:"pray",l:"Pray & journal"},
   {k:"workout",l:"Workout (3–5x/week)"},
-  {k:"abstain",l:"Abstain from your one thing"}
+  {k:"abstain",l:"Abstain from your one thing"},
+  {k:"marco",l:"Marco Polo update"}
 ]
 };
