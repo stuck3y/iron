@@ -3,7 +3,7 @@
   "short_name": "Iron Sharpens",
   "description": "30-day Bible reading and fitness challenges for men.",
   "id": "/",
-  "start_url": "/all/",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
