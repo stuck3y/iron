@@ -14,7 +14,8 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/shared/style.css">
 <link rel="icon" type="image/png" href="/shared/logo.png">
-<link rel="apple-touch-icon" href="/shared/logo.png">
+<link rel="apple-touch-icon" href="/shared/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
 </head>
 <body>
 <header class="header-bg">
@@ -30,5 +31,12 @@
 <script src="config.js"></script>
 <script src="/shared/lang.js"></script>
 <script src="/shared/app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js').catch(function () {});
+  });
+}
+</script>
 </body>
 </html>
