@@ -1,7 +1,7 @@
 // Iron Sharpens Iron — service worker (minimal install-enabling + app shell cache)
-const CACHE = 'isi-v1';
+const CACHE = 'isi-v2';
 const SHELL = [
-  '/all/',
+  '/',
   '/shared/style.css',
   '/shared/app.js',
   '/shared/lang.js',
@@ -43,7 +43,7 @@ self.addEventListener('fetch', (e) => {
           caches.open(CACHE).then((c) => c.put(req, copy));
           return res;
         })
-        .catch(() => caches.match(req).then((r) => r || caches.match('/all/')))
+        .catch(() => caches.match(req).then((r) => r || caches.match('/')))
     );
     return;
   }
