@@ -34,6 +34,11 @@
       var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
       if (!isNaN(d.getTime())) return d;
     }
+    if (P.startDate && /^\d{4}-\d{2}-\d{2}$/.test(P.startDate)) {
+      var sp = P.startDate.split("-");
+      var sd = new Date(parseInt(sp[0]), parseInt(sp[1]) - 1, parseInt(sp[2]));
+      if (!isNaN(sd.getTime())) return sd;
+    }
     var now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), 1);
   }
