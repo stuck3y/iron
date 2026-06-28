@@ -13,6 +13,15 @@
     return;
   }
 
+  // Sync document title and brand subtitle from the plan (translated when lang.js is present).
+  try {
+    var planTitle = (window.tr ? window.tr(P, "title") : P.title) || "";
+    if (planTitle) document.title = "Iron Sharpens Iron — " + planTitle;
+    var sub = document.querySelector(".brand .mono");
+    var planSub = (window.tr ? window.tr(P, "subtitle") : P.subtitle) || "";
+    if (sub && planSub) sub.textContent = planSub;
+  } catch (e) {}
+
   var DAYS = P.days;
   var WV = P.verses;
   var CHECKS = P.checks;
