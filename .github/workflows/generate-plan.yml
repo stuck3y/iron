@@ -1,0 +1,88 @@
+name: Generate monthly plan
+
+on:
+  push:
+    branches:
+      - "plan-inbox/**"
+    paths:
+      - "inbox/*.pdf"
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "Target month (lowercase English, e.g. september)"
+        required: true
+      year:
+        description: "Target year (e.g. 2026)"
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Resolve target month
+        id: target
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            MONTH="${{ inputs.month }}"
+            YEAR="${{ inputs.year }}"
+          else
+            # Branch convention: plan-inbox/<year>-<month>  e.g. plan-inbox/2026-september
+            REF="${GITHUB_REF_NAME#plan-inbox/}"
+            YEAR="${REF%%-*}"
+            MONTH="${REF#*-}"
+          fi
+          MONTH="$(echo "$MONTH" | tr '[:upper:]' '[:lower:]')"
+          case "$MONTH" in
+            january|february|march|april|may|june|july|august|september|october|november|december) ;;
+            *) echo "Invalid month: $MONTH"; exit 1 ;;
+          esac
+          echo "month=$MONTH" >> "$GITHUB_OUTPUT"
+          echo "year=$YEAR" >> "$GITHUB_OUTPUT"
+          echo "pdf=inbox/$YEAR-$MONTH.pdf" >> "$GITHUB_OUTPUT"
+
+      - name: Generate plan JSON with Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MONTH: ${{ steps.target.outputs.month }}
+          YEAR: ${{ steps.target.outputs.year }}
+          PDF_PATH: ${{ steps.target.outputs.pdf }}
+          OUT: ${{ runner.temp }}/plan.json
+        run: node pipeline/generate.mjs
+
+      - name: Serialize to config.js + index.html
+        run: node pipeline/serialize.mjs "${{ runner.temp }}/plan.json" "${{ steps.target.outputs.month }}"
+
+      - name: Validate
+        run: node pipeline/validate.mjs "${{ steps.target.outputs.month }}"
+
+      - name: Commit generated plan
+        run: |
+          git config user.name "isi-plan-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add "${{ steps.target.outputs.month }}/"
+          git commit -m "Generate ${{ steps.target.outputs.month }} ${{ steps.target.outputs.year }} plan from tracker PDF"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          MONTH="${{ steps.target.outputs.month }}"
+          YEAR="${{ steps.target.outputs.year }}"
+          TITLE_MONTH="$(echo "${MONTH^}")"
+          gh pr create \
+            --base main \
+            --head "$GITHUB_REF_NAME" \
+            --title "Monthly plan: $TITLE_MONTH $YEAR" \
+            --body "$(printf 'Auto-generated from the tracker PDF in inbox/.\n\n- Preview after merge: https://sharpiron.org/%s/ (shows the \"begins %s 1\" banner until the 1st, then goes live automatically)\n- Validation passed: schema, i18n coverage, injection guard\n- Source PDF is included in this branch for reference\n\nReview the readings, topics, and verses, then merge.' "$MONTH" "$TITLE_MONTH")" \
+            || echo "PR already exists for this branch — new commits were pushed to it."
