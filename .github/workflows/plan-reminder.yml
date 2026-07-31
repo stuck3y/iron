@@ -1,0 +1,48 @@
+name: Next-month plan reminder
+
+on:
+  schedule:
+    # 25th of every month, 14:00 UTC
+    - cron: "0 14 25 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check whether next month's plan exists
+        id: check
+        run: |
+          read -r MONTH LABEL <<< "$(node -e '
+            const M=["january","february","march","april","may","june","july","august","september","october","november","december"];
+            const now=new Date(); const n=new Date(now.getFullYear(), now.getMonth()+1, 1);
+            const m=M[n.getMonth()];
+            console.log(m + " " + m.charAt(0).toUpperCase()+m.slice(1) + "-" + n.getFullYear());
+          ')"
+          echo "month=$MONTH" >> "$GITHUB_OUTPUT"
+          echo "label=$LABEL" >> "$GITHUB_OUTPUT"
+          if [ -f "$MONTH/config.js" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open reminder issue if missing
+        if: steps.check.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="No ${{ steps.check.outputs.label }} plan submitted yet"
+          EXISTING=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number --jq length)
+          if [ "$EXISTING" = "0" ]; then
+            gh issue create --title "$TITLE" \
+              --body "The 1st is coming up and ${{ steps.check.outputs.month }}/config.js does not exist on main yet. Upload the tracker PDF at https://sharpiron.org/submit/ — or the site will show the fallback card next month."
+          else
+            echo "Reminder issue already open."
+          fi

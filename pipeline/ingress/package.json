@@ -1,0 +1,7 @@
+{
+  "name": "isi-plan-ingress",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Iron Sharpens Iron — tracker PDF submission endpoint",
+  "engines": { "node": ">=18" }
+}
